@@ -1,0 +1,1839 @@
+<!DOCTYPE html><html lang='en-GB'><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AMG Advisory — v2.2 preview</title>
+<meta name="description" content="We find where your organisation loses time, put a number on it, and remove the work. Founder-led operational transformation for organisations of 50–1000 people in Norway and the Nordics.">
+<link rel="canonical" href="https://www.amgadvisory.no/">
+<meta name="theme-color" content="#070709">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMG Advisory">
+<meta property="og:title" content="AMG Advisory — Administration is growing faster than your revenue">
+<meta property="og:description" content="We find where your organisation loses time, put a number on it, and remove the work. Founder-led operational transformation for organisations of 50–1000 people in Norway and the Nordics.">
+<meta property="og:url" content="https://www.amgadvisory.no/">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"AMG Advisory","url":"https://www.amgadvisory.no","email":"hello@amgadvisory.no","description":"We find where your organisation loses time, and remove the work.","areaServed":["Norway","Sweden","Denmark","Finland"],"address":{"@type":"PostalAddress","addressLocality":"Bergen","addressCountry":"NO"},"founder":[{"@type":"Person","name":"Anders Godfrey","jobTitle":"Founder"},{"@type":"Person","name":"Morten Godfrey","jobTitle":"Research, implementation and delivery support"}],"numberOfEmployees":{"@type":"QuantitativeValue","value":2},"knowsAbout":["Business process automation","Operational efficiency","Systems integration","Applied AI","Process discovery and redesign"]}</script><script type="application/json" id="amg-config">{"friction": {"bands": [[0, 6, "Low friction", "The process is reasonably contained. Automation may still help, but the case will rest on volume rather than on friction."], [7, 13, "Moderate friction", "There is a recognisable pattern here. Redesign before automation is likely to release value on its own."], [14, 21, "High friction", "Friction is concentrated enough that measurement is worth doing before any tooling decision is made."]], "sources": {"systems": "the number of systems involved", "reentry": "repeated manual data entry", "approvals": "approval stages and waiting time", "keyperson": "dependence on a single person", "exceptions": "undocumented exception handling", "reporting": "the effort of reporting on the process", "scaling": "effort scaling directly with volume"}, "measureFirst": "Suggested first measurement: record elapsed time and touch count for twenty real cases, including the ones that went wrong."}, "suitability": {"results": {"process_first": ["Improve the process first", "The rules or the inputs are not stable enough to automate against. Redesign is likely to release value on its own, and it makes any later automation cheaper and safer."], "conventional": ["Suitable for conventional automation", "Structured inputs and consistent rules point towards integration and workflow automation rather than AI. This is usually the cheapest and most reliable route, and the one to exhaust first."], "ai_assisted": ["Suitable for an AI-assisted workflow", "Inputs vary enough that rules alone will not cover them, but the outcome is measurable and exceptions can be identified. That is the shape where a narrow AI step inside a conventional workflow earns its place."], "human_led": ["Keep this human-led", "Judgement is central and the volume does not justify the engineering. Automating around it would add risk without releasing much capacity. Document it well instead."], "assess": ["Requires deeper assessment", "The answers point in different directions, which usually means the process is really several processes. Measurement would need to come before any recommendation."]}}}</script>
+<style>/* ==========================================================================
+   AMG ADVISORY — v3
+   Dark operational system. Electric flow lines. Documents becoming data.
+   Nordic restraint carrying global-consultancy confidence.
+
+   Order: tokens → base → type → compositions → components → motion → print
+   Every colour pair below was measured; ratios are noted where they matter.
+   ========================================================================== */
+
+/* --- Tokens -------------------------------------------------------------- */
+:root {
+  /* Grounds. Four steps of dark, used to separate sections without borders. */
+  --void:    #070709;
+  --base:    #0b0b10;
+  --raised:  #10101a;
+  --deep:    #131326;
+
+  /* Light interruption — used for editorial breaks only, never as default. */
+  --paper:   #f6f5f2;
+  --paper-2: #eceae4;
+
+  /* Text on dark. t1 17.9:1, t2 9.4:1, t3 5.2:1 — all clear AA. */
+  --t1: #f4f4f7;
+  --t2: rgba(244, 244, 247, 0.72);
+  --t3: rgba(244, 244, 247, 0.52);
+  --t4: rgba(244, 244, 247, 0.34);   /* decorative only, never body text */
+
+  /* Accents. Violet is the brand voice; it fills, borders and marks.
+     Violet-text is the same hue lifted to 5.6:1 for small type.
+     Coral marks cost and friction. Cobalt carries data. */
+  --violet:      #6c5cff;
+  --violet-text: #8b7dff;
+  --violet-deep: #4b34e8;            /* violet on the light interruption, 6.5:1 */
+  --violet-soft: rgba(108, 92, 255, 0.14);
+  --violet-line: rgba(108, 92, 255, 0.34);
+  --cobalt:      #3d7bff;
+  --cobalt-text: #6ea0ff;
+  --coral:       #ff6a4b;
+  --coral-soft:  rgba(255, 106, 75, 0.14);
+
+  --line:   rgba(244, 244, 247, 0.10);
+  --line-2: rgba(244, 244, 247, 0.20);
+
+  /* Type */
+  --sans:  "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Newsreader", ui-serif, Georgia, serif;
+  --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Rhythm */
+  --gut: clamp(1.25rem, 5vw, 3rem);
+  --maxw: 84rem;
+  --sect: clamp(5rem, 11vw, 10rem);
+  --nav-h: 4.5rem;
+
+  --r: 0.75rem;
+  --r-lg: 1.5rem;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* --- Base ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--base);
+  color: var(--t1);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+::selection { background: var(--violet); color: #fff; }
+:focus-visible { outline: 2px solid var(--violet-text); outline-offset: 3px; border-radius: 3px; }
+.mono, .stat, table, time, output { font-variant-numeric: tabular-nums; }
+
+.skip {
+  position: absolute; left: var(--gut); top: -6rem; z-index: 400;
+  background: var(--violet); color: #fff; padding: 0.75rem 1.25rem;
+  border-radius: var(--r); font-size: 0.875rem; font-weight: 600; transition: top 0.2s var(--ease);
+}
+.skip:focus { top: 0.75rem; }
+.vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* --- Type ---------------------------------------------------------------- */
+.kicker {
+  font-family: var(--mono); font-size: 0.6875rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--t3);
+  display: inline-flex; align-items: center; gap: 0.75rem;
+}
+.kicker::before { content: ""; width: 1.75rem; height: 1px; background: var(--violet); flex: none; }
+.kicker--plain::before { display: none; }
+
+.d0 { font-size: clamp(2.75rem, 9.5vw, 8rem);  line-height: 0.94; letter-spacing: -0.045em; font-weight: 600; }
+.d1 { font-size: clamp(2.25rem, 6vw, 4.5rem);  line-height: 1.02; letter-spacing: -0.038em; font-weight: 600; }
+.d2 { font-size: clamp(1.875rem, 4.2vw, 3.25rem); line-height: 1.06; letter-spacing: -0.032em; font-weight: 600; }
+.d3 { font-size: clamp(1.375rem, 2.4vw, 1.875rem); line-height: 1.16; letter-spacing: -0.024em; font-weight: 600; }
+.d4 { font-size: 1.125rem; line-height: 1.34; letter-spacing: -0.016em; font-weight: 600; }
+
+.lede { font-family: var(--serif); font-weight: 300; font-size: clamp(1.125rem, 2vw, 1.5rem); line-height: 1.52; color: var(--t2); max-width: 40ch; }
+.body { color: var(--t2); max-width: 36rem; }
+.small { font-size: 0.9375rem; line-height: 1.62; color: var(--t2); }
+.micro { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--t3); }
+.stat { font-family: var(--mono); font-weight: 500; letter-spacing: -0.03em; line-height: 1; font-size: clamp(1.75rem, 3.6vw, 2.75rem); }
+.accent { color: var(--violet-text); }
+.accent-2 { color: var(--coral); }
+
+/* --- Layout -------------------------------------------------------------- */
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gut); }
+.wrap--narrow { max-width: 60rem; }
+.section { padding-block: var(--sect); position: relative; }
+.section--tight { padding-block: clamp(3.5rem, 7vw, 6rem); }
+.bg-base { background: var(--base); }
+.bg-void { background: var(--void); }
+.bg-raised { background: var(--raised); }
+.bg-deep { background: var(--deep); }
+.rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+/* ==========================================================================
+   COMPOSITION 1 — STAGE (full-viewport hero)
+   ========================================================================== */
+.stage {
+  position: relative; min-height: 100svh; display: flex; flex-direction: column;
+  justify-content: center; padding-block: calc(var(--nav-h) + 3rem) 5rem;
+  overflow: hidden; background: var(--void);
+}
+.stage__media { position: absolute; inset: 0; z-index: 0; opacity: 0.5; }
+.stage__media svg { width: 100%; height: 100%; }
+.stage__scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 20% 40%, rgba(7, 7, 9, 0.2) 0%, rgba(7, 7, 9, 0.86) 62%, var(--void) 100%);
+}
+.stage__in { position: relative; z-index: 2; width: 100%; }
+.stage h1 { max-width: 15ch; }
+.stage h1 span { display: block; }
+.stage h1 span:nth-child(2) { padding-left: clamp(0rem, 6vw, 6rem); }
+.stage h1 span:nth-child(3) { padding-left: clamp(0rem, 12vw, 12rem); color: var(--violet-text); }
+.stage__sub { margin-top: clamp(1.5rem, 3vw, 2.5rem); max-width: 34rem; }
+.stage__actions { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; margin-top: 2.25rem; }
+.stage__micro { margin-top: 1.25rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--t3); }
+.stage__foot {
+  position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 1rem 2rem;
+  align-items: flex-end; justify-content: space-between; margin-top: auto; padding-top: 3rem;
+}
+.stage__count { display: grid; gap: 0.375rem; }
+.stage__count .stat { color: var(--violet-text); font-size: clamp(1.5rem, 3vw, 2.25rem); }
+.scrollcue { display: inline-flex; align-items: center; gap: 0.625rem; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--t3); }
+.scrollcue i { display: block; width: 1px; height: 2.25rem; background: linear-gradient(var(--violet), transparent); }
+@media (prefers-reduced-motion: no-preference) {
+  .scrollcue i { animation: cue 2.4s var(--ease-io) infinite; transform-origin: top; }
+  @keyframes cue { 0%, 100% { transform: scaleY(0.4); opacity: 0.5; } 50% { transform: scaleY(1); opacity: 1; } }
+}
+
+/* ==========================================================================
+   COMPOSITION 2 — SPLIT (media beside copy, alternating)
+   ========================================================================== */
+.split { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+@media (min-width: 60rem) {
+  .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .split--reverse .split__media { order: 2; }
+  .split--wide-media { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+}
+.split__copy { display: grid; gap: 1.25rem; align-content: start; }
+
+/* ==========================================================================
+   COMPOSITION 3 — STICKY STORY (pinned visual, advancing text)
+   ========================================================================== */
+.story { display: grid; gap: 2.5rem; }
+@media (min-width: 62rem) { .story { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(3rem, 6vw, 5rem); align-items: start; } }
+.story__pin { position: relative; }
+@media (min-width: 62rem) { .story__pin { position: sticky; top: calc(var(--nav-h) + 3rem); } }
+.story__stage {
+  border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--void);
+  padding: clamp(1rem, 2.5vw, 1.75rem); overflow: hidden;
+}
+.story__svg { width: 100%; height: auto; }
+.story__steps { display: grid; gap: 0; }
+.story__step {
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0 1.25rem;
+  opacity: 0.34; transition: opacity 0.45s var(--ease);
+}
+.story__step[data-on="true"] { opacity: 1; }
+.story__step:last-child { border-bottom: 1px solid var(--line); }
+.story__n { font-family: var(--mono); font-size: 0.75rem; color: var(--violet-text); padding-top: 0.35rem; }
+.story__step[data-phase="after"] .story__n { color: var(--cobalt-text); }
+.story__tally { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.story__tally div { display: grid; gap: 0.375rem; }
+.story__tally .stat { font-size: clamp(1.25rem, 2.2vw, 1.625rem); }
+.story__tally .from { color: var(--t3); }
+.story__tally .arrow { color: var(--t4); margin-inline: 0.4rem; }
+.story__tally .to { color: var(--violet-text); }
+
+/* ==========================================================================
+   COMPOSITION 4 — EDITORIAL CARDS (image-led, asymmetric)
+   ========================================================================== */
+.cards { display: grid; gap: 1.25rem; }
+@media (min-width: 48rem) { .cards--2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64rem) {
+  .cards--2 { grid-template-columns: repeat(2, 1fr); }
+  .cards--stagger > *:nth-child(even) { transform: translateY(2.5rem); }
+}
+.card {
+  position: relative; display: grid; grid-template-rows: auto 1fr;
+  background: var(--raised); border: 1px solid var(--line); border-radius: var(--r-lg);
+  overflow: hidden; transition: border-color 0.3s var(--ease), transform 0.4s var(--ease);
+}
+.card:hover { border-color: var(--violet-line); transform: translateY(-3px); }
+.card__body { padding: clamp(1.5rem, 3vw, 2rem); display: grid; gap: 0.75rem; align-content: start; }
+.card__n { font-family: var(--mono); font-size: 0.75rem; color: var(--violet-text); letter-spacing: 0.1em; }
+.card__link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 600; color: var(--violet-text); margin-top: 0.25rem; }
+.card:hover .card__link .arw { transform: translateX(4px); }
+.card--tall .media { aspect-ratio: 3 / 4; }
+
+/* ==========================================================================
+   COMPOSITION 5 — INTERSTITIAL (vivid full-width interruption)
+   ========================================================================== */
+.interstitial { background: var(--violet); color: #fff; }
+.interstitial .kicker { color: rgba(255, 255, 255, 0.72); }
+.interstitial .kicker::before { background: rgba(255, 255, 255, 0.6); }
+.interstitial .body, .interstitial .lede { color: rgba(255, 255, 255, 0.86); }
+.interstitial .stat { color: #fff; }
+
+/* Light editorial interruption inside the dark system. */
+.light { background: var(--paper); color: #0b0b10; }
+.light .body, .light .small, .light .lede { color: #43434a; }
+.light .kicker { color: #5d5d66; }
+.light .kicker::before { background: var(--violet-deep); }
+.light .micro { color: #5d5d66; }
+.light .accent { color: var(--violet-deep); }
+.light .rule { background: rgba(11, 11, 16, 0.12); }
+
+/* ==========================================================================
+   COMPOSITION 6 — MANIFESTO (single-column large statement)
+   ========================================================================== */
+.manifesto { max-width: 46rem; }
+.manifesto p + p { margin-top: 1.5rem; }
+.manifesto .lead-line { font-size: clamp(1.375rem, 2.6vw, 2rem); line-height: 1.3; letter-spacing: -0.026em; color: var(--t1); font-weight: 500; }
+
+/* --- Media placeholders --------------------------------------------------
+   No licensed assets exist. These frames are deliberately visible and carry
+   their own art direction, so nothing is mistaken for a production image. */
+.media {
+  position: relative; aspect-ratio: 16 / 10; overflow: hidden;
+  background: var(--void); border-bottom: 1px solid var(--line);
+  display: grid; place-items: center; padding: 1.5rem;
+}
+.media--tall { aspect-ratio: 3 / 4; }
+.media--wide { aspect-ratio: 21 / 9; }
+.media--square { aspect-ratio: 1 / 1; }
+.media::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 4.5rem),
+    repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 4.5rem);
+  opacity: 0.55;
+}
+.media::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(80% 60% at 30% 30%, var(--violet-soft), transparent 70%);
+}
+.media__label {
+  position: relative; z-index: 1; font-family: var(--mono); font-size: 0.6875rem;
+  line-height: 1.5; letter-spacing: 0.04em; color: var(--t3); text-align: center;
+  max-width: 26rem; border: 1px dashed var(--line-2); border-radius: var(--r);
+  padding: 0.75rem 1rem; background: rgba(7, 7, 9, 0.72);
+}
+.media__tag {
+  position: absolute; top: 0.75rem; left: 0.75rem; z-index: 2;
+  font-family: var(--mono); font-size: 0.5625rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--coral); background: var(--coral-soft); border-radius: 100px; padding: 0.25rem 0.625rem;
+}
+
+/* --- Buttons and links --------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.625rem;
+  padding: 0.9375rem 1.5rem; border-radius: 100px; border: 1px solid transparent;
+  font-size: 0.9375rem; font-weight: 600; letter-spacing: -0.01em; cursor: pointer;
+  background: none; text-align: left;
+  transition: background-color 0.22s var(--ease), border-color 0.22s var(--ease),
+              color 0.22s var(--ease), transform 0.22s var(--ease);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: none; }
+.btn--primary { background: var(--violet); color: #fff; }           /* white on violet 4.55:1 */
+.btn--primary:hover { background: #7d6fff; }
+.btn--ghost { border-color: var(--line-2); color: var(--t1); }
+.btn--ghost:hover { border-color: var(--t1); background: rgba(244, 244, 247, 0.06); }
+.btn--light { background: var(--t1); color: var(--base); }
+.btn--light:hover { background: #fff; }
+.btn--onviolet { background: #fff; color: var(--violet-deep); }
+.btn--onviolet:hover { background: var(--paper); }
+.btn--small { padding: 0.5625rem 1rem; font-size: 0.8438rem; }
+.btn[disabled] { opacity: 0.4; cursor: not-allowed; transform: none; }
+.btn .arw, .lnk .arw { transition: transform 0.22s var(--ease); }
+.btn:hover .arw, .lnk:hover .arw { transform: translateX(3px); }
+
+.lnk { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 0.9375rem; position: relative; padding-bottom: 2px; color: var(--violet-text); }
+.lnk::after { content: ""; position: absolute; inset: auto 0 0 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--ease); }
+.lnk:hover::after { transform: scaleX(1); }
+.light .lnk { color: var(--violet-deep); }
+
+/* --- Header + full-screen menu ------------------------------------------ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: var(--nav-h);
+  display: flex; align-items: center;
+  background: rgba(11, 11, 16, 0);
+  backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
+}
+.nav[data-stuck="true"] {
+  background: rgba(11, 11, 16, 0.82);
+  backdrop-filter: saturate(160%) blur(16px); -webkit-backdrop-filter: saturate(160%) blur(16px);
+  border-bottom-color: var(--line);
+}
+.nav__in { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.brand { display: inline-flex; align-items: baseline; gap: 0.5rem; font-weight: 700; letter-spacing: -0.035em; font-size: 1.25rem; }
+.brand small { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--t3); font-weight: 400; }
+.nav__links { display: none; gap: 0.25rem; }
+@media (min-width: 64rem) { .nav__links { display: flex; } }
+.nav__links a { padding: 0.5rem 0.875rem; border-radius: 100px; font-size: 0.9063rem; font-weight: 500; color: var(--t2); transition: color 0.2s, background-color 0.2s; }
+.nav__links a:hover { color: var(--t1); background: rgba(244, 244, 247, 0.07); }
+.nav__links a[aria-current="page"] { color: var(--t1); }
+.nav__links a[aria-current="page"]::after { content: ""; display: block; height: 1px; background: var(--violet); margin-top: 3px; }
+.nav__right { display: flex; align-items: center; gap: 0.625rem; }
+.nav__cta { display: none; }
+@media (min-width: 48rem) { .nav__cta { display: inline-flex; } }
+
+.menubtn {
+  display: inline-flex; align-items: center; gap: 0.625rem; padding: 0.5625rem 1rem;
+  border: 1px solid var(--line-2); border-radius: 100px; background: none; cursor: pointer;
+  font-size: 0.875rem; font-weight: 600; color: var(--t1);
+}
+.menubtn i { display: block; width: 1rem; height: 1.5px; background: currentColor; border-radius: 2px; transition: transform 0.3s var(--ease), opacity 0.2s; }
+.menubtn span { display: grid; gap: 4px; }
+.menubtn[aria-expanded="true"] i:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.menubtn[aria-expanded="true"] i:nth-child(2) { opacity: 0; }
+.menubtn[aria-expanded="true"] i:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+.menu {
+  position: fixed; inset: 0; z-index: 199; background: var(--void);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--nav-h) + 2rem) var(--gut) 3rem; overflow-y: auto;
+  opacity: 0; visibility: hidden; transition: opacity 0.35s var(--ease), visibility 0.35s;
+}
+.menu[data-open="true"] { opacity: 1; visibility: visible; }
+.menu__list { display: grid; gap: 0; max-width: var(--maxw); width: 100%; margin-inline: auto; }
+.menu__item {
+  display: grid; gap: 0.375rem; padding: clamp(1rem, 2.4vw, 1.5rem) 0;
+  border-top: 1px solid var(--line);
+  opacity: 0; transform: translateY(0.75rem);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.25s;
+}
+.menu__item:last-child { border-bottom: 1px solid var(--line); }
+.menu[data-open="true"] .menu__item { opacity: 1; transform: none; }
+.menu__item:hover { color: var(--violet-text); }
+.menu__label { font-size: clamp(2rem, 6vw, 4rem); line-height: 1; letter-spacing: -0.04em; font-weight: 600; }
+.menu__desc { font-size: 0.9375rem; color: var(--t3); }
+.menu__foot { max-width: var(--maxw); width: 100%; margin: 2.5rem auto 0; display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; justify-content: space-between; }
+
+/* --- Symptoms ------------------------------------------------------------ */
+.symptom {
+  display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 0 1.25rem;
+  padding: clamp(1.25rem, 2.6vw, 1.875rem) 0; border-top: 1px solid var(--line);
+  transition: background-color 0.3s var(--ease);
+}
+@media (min-width: 56rem) { .symptom { grid-template-columns: 3rem minmax(0, 20rem) minmax(0, 1fr) auto; align-items: baseline; gap: 0 2.5rem; } }
+.symptom:last-child { border-bottom: 1px solid var(--line); }
+.symptom__n { font-family: var(--mono); font-size: 0.75rem; color: var(--violet-text); }
+.symptom__cost { font-family: var(--mono); font-size: 0.75rem; color: var(--coral); white-space: nowrap; }
+
+/* --- Data panels + diagnostic ------------------------------------------- */
+.panel { background: var(--raised); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+.panel--split { display: grid; }
+@media (min-width: 58rem) { .panel--split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.panel__in { padding: clamp(1.5rem, 3vw, 2.25rem); }
+.panel__out { padding: clamp(1.5rem, 3vw, 2.25rem); background: var(--void); display: grid; gap: 1.5rem; align-content: start; }
+@media (min-width: 58rem) { .panel--split .panel__out { border-left: 1px solid var(--line); } }
+
+.ctrl { display: grid; gap: 0.625rem; padding-block: 1.125rem; border-bottom: 1px solid var(--line); }
+.ctrl:last-of-type { border-bottom: 0; }
+.ctrl__top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.ctrl label { font-size: 0.9375rem; font-weight: 500; letter-spacing: -0.01em; }
+.ctrl output { font-family: var(--mono); font-size: 0.9375rem; font-weight: 500; color: var(--violet-text); }
+.ctrl input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 1.5rem; background: none; cursor: pointer; }
+.ctrl input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: var(--line-2); border-radius: 2px; }
+.ctrl input[type="range"]::-moz-range-track { height: 2px; background: var(--line-2); border-radius: 2px; }
+.ctrl input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 1.125rem; height: 1.125rem; margin-top: -0.5rem; background: var(--violet); border: 0; border-radius: 50%; transition: transform 0.15s var(--ease), box-shadow 0.15s; }
+.ctrl input[type="range"]::-moz-range-thumb { width: 1.125rem; height: 1.125rem; background: var(--violet); border: 0; border-radius: 50%; }
+.ctrl input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.12); }
+.ctrl input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px var(--violet-soft); }
+
+.figures { display: grid; gap: 1.25rem; }
+@media (min-width: 30rem) { .figures { grid-template-columns: 1fr 1fr; } }
+.figure { display: grid; gap: 0.375rem; }
+.figure--lead { grid-column: 1 / -1; }
+.figure--lead .stat { font-size: clamp(2.25rem, 6vw, 3.5rem); color: var(--violet-text); }
+.rows { display: grid; gap: 0.6875rem; padding-top: 1.125rem; border-top: 1px solid var(--line); }
+.rows div { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.8125rem; color: var(--t2); }
+.rows b { color: var(--t1); font-weight: 500; }
+.rows b.is-accent { color: var(--violet-text); }
+.rows b.is-warn { color: var(--coral); }
+
+.bars { display: grid; gap: 0.875rem; }
+.bar { display: grid; gap: 0.4375rem; }
+.bar__top { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.75rem; color: var(--t2); }
+.bar__top b { color: var(--t1); font-weight: 500; }
+.bar__track { height: 0.5rem; border-radius: 100px; background: rgba(244, 244, 247, 0.09); overflow: hidden; }
+.bar__fill { height: 100%; border-radius: 100px; background: rgba(244, 244, 247, 0.3); transition: width 0.6s var(--ease); }
+.bar--accent .bar__fill { background: var(--violet); }
+.bar--warn .bar__fill { background: var(--coral); }
+
+/* Stepper */
+.stepper { display: grid; gap: 1.25rem; }
+.stepper__bar { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; align-items: center; justify-content: space-between; }
+.stepper__track { display: flex; gap: 0.375rem; flex: 1; min-width: 8rem; }
+.stepper__seg { height: 3px; flex: 1; border-radius: 2px; background: var(--line-2); transition: background-color 0.35s var(--ease); }
+.stepper__seg[data-on="true"] { background: var(--violet); }
+.stepper__nav { display: flex; gap: 0.625rem; flex-wrap: wrap; }
+.step[hidden] { display: none; }
+.stepnames { display: none; }
+@media (min-width: 44rem) { .stepnames { display: flex; gap: 1.5rem; flex-wrap: wrap; } }
+.stepnames span { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--t4); }
+.stepnames span[data-on="true"] { color: var(--violet-text); }
+
+/* Questions */
+.qs { display: grid; gap: 1.25rem; }
+.q { display: grid; gap: 0.625rem; padding: 0 0 1.25rem; margin: 0; border: 0; border-bottom: 1px solid var(--line); }
+.q:last-child { border-bottom: 0; padding-bottom: 0; }
+.q > legend { font-size: 0.9375rem; font-weight: 500; letter-spacing: -0.01em; padding: 0; }
+.q__opts { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.q__opt { position: relative; }
+.q__opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.q__opt label { display: inline-block; padding: 0.5rem 0.9375rem; border: 1px solid var(--line-2); border-radius: 100px; font-size: 0.875rem; cursor: pointer; transition: border-color 0.18s, background-color 0.18s, color 0.18s; }
+.q__opt label:hover { border-color: var(--t1); }
+.q__opt input:checked + label { background: var(--violet); border-color: var(--violet); color: #fff; }
+.q__opt input:focus-visible + label { outline: 2px solid var(--violet-text); outline-offset: 3px; }
+
+.verdict { display: grid; gap: 0.75rem; }
+.verdict__band { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t2); }
+.verdict__band i { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--violet); }
+.verdict[data-band="high"] .verdict__band i { background: var(--coral); }
+.verdict[data-band="low"] .verdict__band i { background: var(--t3); }
+
+.summary { border: 1px solid var(--violet-line); border-radius: var(--r); background: var(--violet-soft); padding: 1.25rem; }
+.summary p { font-size: 0.9375rem; line-height: 1.6; color: var(--t1); }
+.summary__row { display: flex; flex-wrap: wrap; gap: 0.625rem; align-items: center; margin-top: 1rem; }
+.pending { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--t3); border: 1px dashed var(--line-2); border-radius: 100px; padding: 0.3125rem 0.6875rem; }
+
+/* --- Team ---------------------------------------------------------------- */
+.team { display: grid; gap: 1.25rem; }
+@media (min-width: 62rem) { .team { grid-template-columns: 1.75fr 1fr; align-items: start; } }
+.team__card { background: var(--raised); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+.team__card--support { background: var(--base); }
+.team__body { padding: clamp(1.5rem, 3vw, 2.25rem); display: grid; gap: 0.75rem; }
+.team__role { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--violet-text); }
+.team__card--support .team__role { color: var(--t3); }
+.team__resp { margin-top: 0.75rem; }
+.team__resp h4 { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t3); font-weight: 500; margin-bottom: 0.75rem; }
+.tick { display: grid; gap: 0.5rem; }
+.tick li { display: grid; grid-template-columns: 0.75rem 1fr; gap: 0.75rem; font-size: 0.9063rem; color: var(--t2); }
+.tick li::before { content: ""; width: 0.3125rem; height: 0.3125rem; border-radius: 50%; background: var(--violet); margin-top: 0.55rem; }
+@media (min-width: 44rem) { .team__card:not(.team__card--support) .tick { grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; } }
+.ph { display: inline-block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.03em; color: var(--coral); background: var(--coral-soft); border: 1px dashed rgba(255, 106, 75, 0.4); border-radius: 0.5rem; padding: 0.4375rem 0.6875rem; }
+
+/* --- Case ---------------------------------------------------------------- */
+.case__grid { display: grid; gap: 1.5rem 3rem; }
+@media (min-width: 52rem) { .case__grid { grid-template-columns: 1fr 1fr; } }
+.case__field h3 { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--violet-text); font-weight: 500; margin-bottom: 0.5rem; }
+.case__field p { font-size: 0.9063rem; line-height: 1.6; color: var(--t2); }
+.tag { display: inline-block; padding: 0.3125rem 0.75rem; border: 1px solid var(--line-2); border-radius: 100px; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--t2); }
+.tag--warn { color: var(--coral); border-color: rgba(255, 106, 75, 0.4); }
+
+/* --- Disclosure / accordions -------------------------------------------- */
+.disc { border: 1px solid var(--line); border-radius: var(--r); background: var(--base); }
+.disc + .disc { margin-top: 0.625rem; }
+.disc > summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.875rem 1.125rem; cursor: pointer; list-style: none; font-size: 0.9063rem; font-weight: 600; }
+.disc > summary::-webkit-details-marker { display: none; }
+.disc > summary:hover { color: var(--violet-text); }
+.sign { position: relative; width: 0.875rem; height: 0.875rem; flex: none; }
+.sign::before, .sign::after { content: ""; position: absolute; background: var(--violet-text); transition: transform 0.3s var(--ease); }
+.sign::before { inset: 50% 0 auto 0; height: 1.5px; transform: translateY(-50%); }
+.sign::after { inset: 0 50% 0 auto; width: 1.5px; transform: translateX(50%); }
+details[open] > summary .sign::after { transform: translateX(50%) scaleY(0); }
+.disc__body { padding: 0 1.125rem 1.125rem; }
+.disc__body dl { display: grid; gap: 0.875rem; margin: 0; }
+.disc__body dt { font-size: 0.8125rem; font-weight: 600; }
+.disc__body dd { margin: 0.25rem 0 0; font-size: 0.8438rem; line-height: 1.55; color: var(--t2); }
+
+.acc { border-top: 1px solid var(--line); }
+.acc details { border-bottom: 1px solid var(--line); }
+.acc summary { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding: 1.375rem 0; cursor: pointer; list-style: none; font-size: clamp(1.0625rem, 1.8vw, 1.25rem); font-weight: 500; letter-spacing: -0.02em; }
+.acc summary::-webkit-details-marker { display: none; }
+.acc summary:hover { color: var(--violet-text); }
+.acc__panel { padding-bottom: 1.5rem; max-width: 46rem; }
+
+/* --- Table --------------------------------------------------------------- */
+.cmp { width: 100%; border-collapse: collapse; text-align: left; }
+.cmp th, .cmp td { padding: 1.125rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 0.9375rem; }
+.cmp thead th { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t3); font-weight: 500; }
+.cmp tbody th { font-weight: 500; color: var(--t1); width: 30%; }
+.cmp td { color: var(--t2); }
+.cmp td:last-child { color: var(--t1); font-weight: 500; }
+.cmp th:first-child, .cmp td:first-child { padding-left: 0; }
+.cmp th:last-child, .cmp td:last-child { padding-right: 0; }
+@media (max-width: 46rem) {
+  .cmp, .cmp tbody, .cmp tr, .cmp td, .cmp th { display: block; width: auto; }
+  .cmp thead { display: none; }
+  .cmp tbody tr { padding-block: 1.25rem; border-bottom: 1px solid var(--line); }
+  .cmp th, .cmp td { border: 0; padding: 0 0 0.5rem; }
+  .cmp td::before { content: attr(data-label); display: block; font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t4); margin-bottom: 0.25rem; }
+}
+
+/* --- Spine (method phases) ---------------------------------------------- */
+.spine { position: relative; }
+@media (min-width: 48rem) { .spine { padding-left: 3.5rem; } .spine::before { content: ""; position: absolute; left: 0.6875rem; top: 1.75rem; bottom: 1.75rem; width: 1px; background: var(--line); } }
+.phase { position: relative; padding-block: 1.75rem; border-bottom: 1px solid var(--line); display: grid; gap: 0.5rem 2.5rem; }
+.phase:last-child { border-bottom: 0; }
+@media (min-width: 48rem) { .phase { grid-template-columns: 12rem minmax(0, 1fr); align-items: baseline; } }
+.phase__dot { display: none; }
+@media (min-width: 48rem) { .phase__dot { display: grid; place-items: center; position: absolute; left: -3.5rem; top: 1.85rem; width: 1.4375rem; height: 1.4375rem; border-radius: 50%; background: var(--base); border: 1px solid var(--line-2); font-family: var(--mono); font-size: 0.625rem; color: var(--t3); } }
+.phase:hover .phase__dot { border-color: var(--violet); color: var(--violet-text); }
+
+/* --- Form ---------------------------------------------------------------- */
+.field { display: grid; gap: 0.5rem; margin-bottom: 1.25rem; }
+.field > span { font-size: 0.875rem; font-weight: 600; }
+.field input, .field textarea, .field select {
+  width: 100%; padding: 0.875rem 1rem; font-size: 0.9688rem; background: var(--void);
+  border: 1px solid var(--line-2); border-radius: var(--r); color: var(--t1);
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.field textarea { min-height: 8rem; resize: vertical; }
+.field :is(input, textarea, select):focus { outline: 0; border-color: var(--violet); box-shadow: 0 0 0 3px var(--violet-soft); }
+.field :is(input, textarea)[aria-invalid="true"] { border-color: var(--coral); }
+.field ::placeholder { color: var(--t3); }
+.formnote { font-size: 0.8125rem; color: var(--t2); }
+
+/* --- Footer -------------------------------------------------------------- */
+.foot { background: var(--void); border-top: 1px solid var(--line); padding-block: clamp(3.5rem, 7vw, 5.5rem) 2rem; }
+.foot a { color: var(--t2); font-size: 0.9375rem; transition: color 0.18s; }
+.foot a:hover { color: var(--t1); }
+.foot__grid { display: grid; gap: 2.5rem; }
+@media (min-width: 48rem) { .foot__grid { grid-template-columns: 1.6fr repeat(3, 1fr); } }
+.foot h2 { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--t3); font-weight: 500; margin-bottom: 1.125rem; }
+.foot ul { display: grid; gap: 0.6875rem; }
+.foot__base { margin-top: clamp(3rem, 6vw, 4.5rem); padding-top: 1.5rem; border-top: 1px solid var(--line); display: grid; gap: 1rem; }
+.foot__base p { font-family: var(--mono); font-size: 0.6875rem; color: var(--t3); letter-spacing: 0.02em; }
+.foot__legal { max-width: 52rem; font-size: 0.8125rem; line-height: 1.6; color: var(--t3); }
+
+/* --- Motion -------------------------------------------------------------- */
+.rv { opacity: 0; transform: translateY(1.25rem); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.rv.in { opacity: 1; transform: none; }
+.rv--left { transform: translateX(-1.5rem); }
+.rv--right { transform: translateX(1.5rem); }
+.rv--scale { transform: scale(0.97); }
+.rv--left.in, .rv--right.in, .rv--scale.in { transform: none; }
+[data-stagger] > * { opacity: 0; transform: translateY(1rem); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+[data-stagger].in > * { opacity: 1; transform: none; }
+[data-stagger].in > *:nth-child(1) { transition-delay: 0.05s; }
+[data-stagger].in > *:nth-child(2) { transition-delay: 0.12s; }
+[data-stagger].in > *:nth-child(3) { transition-delay: 0.19s; }
+[data-stagger].in > *:nth-child(4) { transition-delay: 0.26s; }
+[data-stagger].in > *:nth-child(5) { transition-delay: 0.33s; }
+
+/* Flow line animation, used by the hero and the story diagram. */
+.fline { stroke-dasharray: 6 6; }
+[data-motion="on"] .fline { animation: march 1.5s linear infinite; }
+[data-motion="on"] .fline--fast { animation-duration: 0.9s; }
+@keyframes march { to { stroke-dashoffset: -24; } }
+.fpulse { opacity: 0; }
+[data-motion="on"] .fpulse { animation: pulse 3.2s var(--ease-io) infinite; }
+@keyframes pulse { 0%, 100% { opacity: 0; } 40%, 60% { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  .rv, [data-stagger] > * { opacity: 1 !important; transform: none !important; }
+  .fpulse { opacity: 1; }
+  .cards--stagger > *:nth-child(even) { transform: none; }
+}
+
+/* --- Print --------------------------------------------------------------- */
+@media print {
+  .nav, .menu, .menubtn, .btn, .scrollcue, .stage__media, .stepper__nav, .pv { display: none !important; }
+  body, .bg-void, .bg-raised, .bg-deep, .panel, .panel__out, .interstitial { background: #fff !important; color: #000 !important; }
+  .body, .small, .lede, .micro, .rows div, .t2 { color: #222 !important; }
+  .stat, .figure--lead .stat { color: #000 !important; }
+  .section { padding-block: 1.5rem; }
+  .step[hidden] { display: block !important; }
+  .media { display: none; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; }
+}
+
+/* --- Story diagram layers -----------------------------------------------
+   Default (no attribute, i.e. JavaScript disabled) is fully visible, so the
+   diagram reads as one complete static illustration without scripting. */
+[data-layer] { transition: opacity 0.5s var(--ease); }
+[data-layer][data-on="false"] { opacity: 0.1; }
+[data-layer][data-on="true"] { opacity: 1; }
+.story__svg text { font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; fill: var(--t3); }
+.story__svg .lbl { fill: var(--t1); font-weight: 500; }
+.story__svg .node { fill: var(--raised); stroke: var(--line-2); stroke-width: 1; }
+.story__svg .node--hub { fill: var(--violet); stroke: var(--violet); }
+.story__svg .node--human { fill: var(--void); stroke: var(--t1); }
+.story__svg .node--warn { fill: var(--coral-soft); stroke: var(--coral); }
+.story__svg .p { fill: none; stroke: var(--line-2); stroke-width: 1.25; }
+.story__svg .p--manual { stroke: var(--coral); stroke-dasharray: 5 5; }
+.story__svg .p--auto { stroke: var(--violet); stroke-width: 1.5; }
+.story__svg .warn { fill: var(--coral); }
+.story__svg .ok { fill: var(--violet-text); }
+.hero__svg .hline { fill: none; stroke: var(--violet); stroke-width: 1; opacity: 0.5; }
+.hero__svg .hline--main { stroke: var(--cobalt); stroke-width: 2; opacity: 0.9; }
+.hero__svg .hdoc { fill: var(--violet); opacity: 0.55; }
+.hero__svg .hnode { fill: none; stroke: var(--cobalt); stroke-width: 1.5; }
+</style><style>
+/* === DEVELOPMENT PREVIEW CONTROL — REMOVE BEFORE PRODUCTION === */
+.pv{position:fixed;right:16px;bottom:16px;z-index:9999;font-family:var(--mono);
+ display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.pv__toggle{display:inline-flex;align-items:center;gap:8px;background:#0b0c0e;color:#fff;
+ border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:9px 15px;font-size:11px;
+ letter-spacing:.1em;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.3);
+ font-family:var(--mono)}
+.pv__toggle i{width:6px;height:6px;border-radius:50%;background:#8fa4ff;display:block}
+.pv__menu{display:none;flex-direction:column;background:#0b0c0e;border:1px solid rgba(255,255,255,.18);
+ border-radius:14px;padding:8px;min-width:190px;max-height:60vh;overflow:auto;
+ box-shadow:0 18px 44px rgba(0,0,0,.38)}
+.pv[data-open="true"] .pv__menu{display:flex}
+.pv__menu strong{font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+ color:rgba(255,255,255,.4);padding:8px 10px 6px;font-weight:400}
+.pv__menu a{color:rgba(255,255,255,.68);font-size:12px;padding:8px 10px;border-radius:8px;
+ text-decoration:none;white-space:nowrap}
+.pv__menu a:hover{background:rgba(255,255,255,.09);color:#fff}
+.pv__menu a[aria-current="page"]{background:#fff;color:#0b0c0e}
+.pv__note{font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.4);
+ padding:6px 10px 4px;border-top:1px solid rgba(255,255,255,.14);margin-top:4px;text-transform:uppercase}
+@media print{.pv{display:none}}
+.pv-page[hidden]{display:none}
+/* === END DEVELOPMENT PREVIEW CONTROL === */
+</style></head><body><a class="skip" href="#main-home">Skip to content</a><header class="nav" data-stuck="false">
+<div class="wrap nav__in">
+<a class="brand" href="/" aria-label="AMG Advisory — home">AMG <small>Advisory</small></a>
+<nav class="nav__links" aria-label="Primary"><a href="/services/">Services</a><a href="/approach/">Approach</a><a href="/diagnostic/">Diagnostic</a><a href="/insights/">Insights</a><a href="/about/">About</a></nav>
+<div class="nav__right">
+<a class="btn btn--primary btn--small nav__cta" href="/contact/">Book an operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<button class="menubtn" aria-expanded="false" aria-controls="menu">Menu<span aria-hidden="true"><i></i><i></i><i></i></span></button>
+</div>
+</div>
+</header><div class="menu" id="menu" data-open="false" aria-hidden="true" aria-label="Site menu">
+<div class="menu__list"><a class="menu__item" href="/services/"><span class="menu__label">Services</span><span class="menu__desc">Four capabilities, and where they fit</span></a><a class="menu__item" href="/approach/"><span class="menu__label">Approach</span><span class="menu__desc">The method, and how an engagement runs</span></a><a class="menu__item" href="/diagnostic/"><span class="menu__label">Diagnostic</span><span class="menu__desc">Estimate cost, friction and suitability</span></a><a class="menu__item" href="/insights/"><span class="menu__label">Insights</span><span class="menu__desc">Operational research and analysis</span></a><a class="menu__item" href="/about/"><span class="menu__label">About</span><span class="menu__desc">Founder-led, and directly accountable</span></a><a class="menu__item" href="/contact/"><span class="menu__label">Contact</span><span class="menu__desc">Book an operational review</span></a></div>
+<div class="menu__foot">
+<a class="btn btn--primary" href="/contact/">Book an operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="lnk" href="mailto:hello@amgadvisory.no">hello@amgadvisory.no</a>
+</div>
+</div>
+<div class="pv-page" id="pv/" data-slug="home" hidden><main id="main-home"><section class="stage" id="hero" data-motion="on">
+<div class="stage__media"><svg class="hero__svg" viewBox="0 0 1240 730" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path class="hline fline" d="M-20,70 C260,70 420,365 760,365" style="animation-delay:0.00s"/><path class="hline fline" d="M-20,140 C260,140 420,365 760,365" style="animation-delay:0.18s"/><path class="hline fline" d="M-20,215 C260,215 420,365 760,365" style="animation-delay:0.36s"/><path class="hline fline" d="M-20,290 C260,290 420,365 760,365" style="animation-delay:0.54s"/><path class="hline fline" d="M-20,365 C260,365 420,365 760,365" style="animation-delay:0.72s"/><path class="hline fline" d="M-20,440 C260,440 420,365 760,365" style="animation-delay:0.90s"/><path class="hline fline" d="M-20,515 C260,515 420,365 760,365" style="animation-delay:1.08s"/><path class="hline fline" d="M-20,590 C260,590 420,365 760,365" style="animation-delay:1.26s"/><path class="hline fline" d="M-20,660 C260,660 420,365 760,365" style="animation-delay:1.44s"/><path class="hline--main fline fline--fast" d="M760,365 L1180,365"/><path class="hline fline" d="M900,365 C980,365 1000,520 1120,520"/><rect class="hdoc fpulse" x="60" y="65" width="14" height="10" rx="2" style="animation-delay:0.00s"/><rect class="hdoc fpulse" x="210" y="65" width="14" height="10" rx="2" style="animation-delay:0.50s"/><rect class="hdoc fpulse" x="360" y="65" width="14" height="10" rx="2" style="animation-delay:1.00s"/><rect class="hdoc fpulse" x="100" y="135" width="14" height="10" rx="2" style="animation-delay:0.30s"/><rect class="hdoc fpulse" x="250" y="135" width="14" height="10" rx="2" style="animation-delay:0.80s"/><rect class="hdoc fpulse" x="400" y="135" width="14" height="10" rx="2" style="animation-delay:1.30s"/><rect class="hdoc fpulse" x="140" y="210" width="14" height="10" rx="2" style="animation-delay:0.60s"/><rect class="hdoc fpulse" x="290" y="210" width="14" height="10" rx="2" style="animation-delay:1.10s"/><rect class="hdoc fpulse" x="440" y="210" width="14" height="10" rx="2" style="animation-delay:1.60s"/><rect class="hdoc fpulse" x="60" y="285" width="14" height="10" rx="2" style="animation-delay:0.90s"/><rect class="hdoc fpulse" x="210" y="285" width="14" height="10" rx="2" style="animation-delay:1.40s"/><rect class="hdoc fpulse" x="360" y="285" width="14" height="10" rx="2" style="animation-delay:1.90s"/><rect class="hdoc fpulse" x="100" y="360" width="14" height="10" rx="2" style="animation-delay:1.20s"/><rect class="hdoc fpulse" x="250" y="360" width="14" height="10" rx="2" style="animation-delay:1.70s"/><rect class="hdoc fpulse" x="400" y="360" width="14" height="10" rx="2" style="animation-delay:2.20s"/><rect class="hdoc fpulse" x="140" y="435" width="14" height="10" rx="2" style="animation-delay:1.50s"/><rect class="hdoc fpulse" x="290" y="435" width="14" height="10" rx="2" style="animation-delay:2.00s"/><rect class="hdoc fpulse" x="440" y="435" width="14" height="10" rx="2" style="animation-delay:2.50s"/><rect class="hdoc fpulse" x="60" y="510" width="14" height="10" rx="2" style="animation-delay:1.80s"/><rect class="hdoc fpulse" x="210" y="510" width="14" height="10" rx="2" style="animation-delay:2.30s"/><rect class="hdoc fpulse" x="360" y="510" width="14" height="10" rx="2" style="animation-delay:2.80s"/><rect class="hdoc fpulse" x="100" y="585" width="14" height="10" rx="2" style="animation-delay:2.10s"/><rect class="hdoc fpulse" x="250" y="585" width="14" height="10" rx="2" style="animation-delay:2.60s"/><rect class="hdoc fpulse" x="400" y="585" width="14" height="10" rx="2" style="animation-delay:3.10s"/><rect class="hdoc fpulse" x="140" y="655" width="14" height="10" rx="2" style="animation-delay:2.40s"/><rect class="hdoc fpulse" x="290" y="655" width="14" height="10" rx="2" style="animation-delay:2.90s"/><rect class="hdoc fpulse" x="440" y="655" width="14" height="10" rx="2" style="animation-delay:3.40s"/><circle class="hnode" cx="760" cy="365" r="26"/><circle class="hnode" cx="1180" cy="365" r="10"/><rect class="hnode" x="1090" y="500" width="60" height="40" rx="8"/></svg></div>
+<div class="stage__scrim"></div>
+<div class="wrap stage__in">
+<p class="kicker">Nordic operational transformation</p>
+<h1 class="d0" style="margin-top:1.5rem">
+<span>Administration</span><span>is growing faster</span><span>than your revenue.</span></h1>
+<p class="lede stage__sub">We find where your organisation loses time, put a number on it, and take the work away.</p>
+<div class="stage__actions">
+<a class="btn btn--primary" href="/diagnostic/">Find your first 500 hours<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="lnk" href="/approach/">See the method<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+<p class="stage__micro">An indicative operational diagnostic — not a promise or forecast.</p>
+</div>
+<div class="wrap stage__foot">
+<span class="scrollcue"><i aria-hidden="true"></i>Scroll</span>
+<div class="stage__count">
+<span class="micro">Hours recovered in this illustration</span>
+<span class="stat" data-count="1840" data-suffix=" h">1 840 h</span>
+</div>
+<button type="button" class="btn btn--ghost btn--small" data-motiontoggle aria-controls="hero"
+ aria-pressed="true" data-on="Pause animation" data-off="Play animation">Pause animation</button>
+</div>
+<p class="vh">Animated diagram: three separate streams of documents, numbers and system records move independently and repeatedly duplicate. The streams gradually converge into a single controlled flow, duplicated tasks fall away, one exception is routed to a person, and recovered hours accumulate as a counter.</p>
+</section><section class="section bg-base">
+<div class="wrap">
+<p class="kicker">Recognition</p>
+<h2 class="d2 rv" style="margin-top:1.5rem;max-width:16ch">Five symptoms. One underlying cause.</h2>
+<p class="lede rv" style="margin-top:1rem">Administrative effort scaling with volume rather than with value.</p>
+<div class="rv" style="margin-top:clamp(2rem,4vw,3rem)"><div class="symptom"><span class="symptom__n">01</span><h3 class="d4">The same invoice, keyed twice</h3><p class="small">Arrives by email, matched by hand, entered again downstream.</p><span class="symptom__cost">3–5 min per invoice</span></div><div class="symptom"><span class="symptom__n">02</span><h3 class="d4">A report that is stale on arrival</h3><p class="small">Three days to assemble, from figures that had to be reconciled first.</p><span class="symptom__cost">3–5 finance days a month</span></div><div class="symptom"><span class="symptom__n">03</span><h3 class="d4">The question asked every week</h3><p class="small">The answer exists in a document. Finding it is harder than asking.</p><span class="symptom__cost">Senior time, interrupted</span></div><div class="symptom"><span class="symptom__n">04</span><h3 class="d4">One process, one person</h3><p class="small">It has worked for years. It also means a resignation is a business risk.</p><span class="symptom__cost">Undocumented single point</span></div><div class="symptom"><span class="symptom__n">05</span><h3 class="d4">Growth that costs margin</h3><p class="small">Every new client adds coordination. Headcount rises with revenue.</p><span class="symptom__cost">Revenue up, margin flat</span></div></div>
+</div></section><section class="section bg-void" id="story">
+<div class="wrap">
+<p class="kicker">Transformation</p>
+<div style="display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;justify-content:space-between;margin-top:1.5rem">
+<h2 class="d2 rv" style="max-width:14ch">Seven stages, one process.</h2>
+<span class="tag tag--warn">Illustrative model</span>
+</div>
+<p class="lede rv" style="margin-top:1rem">Purchase-to-pay at roughly four hundred invoices a month.</p>
+
+<div class="story" data-story style="margin-top:clamp(2.5rem,5vw,4rem)">
+<div class="story__pin">
+<div class="story__stage" data-story-stage data-step="0" data-motion="on" id="storystage"><svg class="story__svg" viewBox="0 0 660 260" role="img" aria-labelledby="storytitle"><title id="storytitle">Process diagram: a document arriving, being re-entered and waiting, then the same process with systems connected and only exceptions reaching a person.</title><g data-layer data-from="0"><rect class="node" x="20" y="30" width="110" height="34" rx="7"/><text class="lbl" x="75" y="51" text-anchor="middle">Email</text><rect class="node" x="20" y="90" width="110" height="34" rx="7"/><text class="lbl" x="75" y="111" text-anchor="middle">Portal</text><rect class="node" x="20" y="150" width="110" height="34" rx="7"/><text class="lbl" x="75" y="171" text-anchor="middle">Post</text><rect class="node" x="450" y="30" width="120" height="34" rx="7"/><text class="lbl" x="510" y="51" text-anchor="middle">ERP</text><rect class="node" x="450" y="90" width="120" height="34" rx="7"/><text class="lbl" x="510" y="111" text-anchor="middle">Ledger</text><rect class="node" x="450" y="150" width="120" height="34" rx="7"/><text class="lbl" x="510" y="171" text-anchor="middle">Archive</text></g><g data-layer data-from="1" data-until="3"><rect class="node node--human" x="230" y="80" width="130" height="54" rx="9"/><text class="lbl" x="295" y="112" text-anchor="middle">Manual entry</text><path class="p fline" d="M130,47 C190,47 190,107 230,107"/><path class="p fline" d="M130,107 L230,107"/><path class="p fline" d="M130,167 C190,167 190,107 230,107"/><path class="p--manual fline" d="M360,107 C410,107 410,47 450,47"/><path class="p--manual fline" d="M360,107 L450,107"/><path class="p--manual fline" d="M360,107 C410,107 410,167 450,167"/><text class="warn" x="295" y="152" text-anchor="middle">Re-keyed ×3</text></g><g data-layer data-from="2" data-until="3"><rect class="node node--warn" x="230" y="170" width="130" height="30" rx="15"/><text class="warn" x="295" y="189" text-anchor="middle">2-day approval wait</text></g><g data-layer data-from="3" data-until="3"><circle class="warn" cx="510" cy="215" r="5"/><text class="warn" x="525" y="219">Mismatch found at month end</text></g><g data-layer data-from="4"><rect class="node--hub" x="230" y="80" width="130" height="48" rx="9"/><text x="295" y="108" text-anchor="middle" style="fill:#fff;font-weight:500">Automated intake</text><path class="p--auto fline fline--fast" d="M130,47 C190,47 190,104 230,104"/><path class="p--auto fline fline--fast" d="M130,107 L230,104"/><path class="p--auto fline fline--fast" d="M130,167 C190,167 190,104 230,104"/><path class="p--auto fline fline--fast" d="M360,104 C410,104 410,47 450,47"/><path class="p--auto fline fline--fast" d="M360,104 L450,107"/><path class="p--auto fline fline--fast" d="M360,104 C410,104 410,167 450,167"/></g><g data-layer data-from="5"><path class="p--auto fline" d="M295,128 L295,180"/><rect class="node node--human" x="230" y="180" width="130" height="38" rx="9"/><text class="lbl" x="295" y="204" text-anchor="middle">Exception review</text></g><g data-layer data-from="6"><path class="p--auto fline" d="M360,199 C410,199 420,167 450,167"/><circle class="ok" cx="600" cy="107" r="4"/><text class="ok" x="405" y="245">Audit trail written automatically</text></g></svg></div>
+<div style="display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap">
+<button type="button" class="btn btn--ghost btn--small" data-story-nav="prev">Previous stage</button>
+<button type="button" class="btn btn--ghost btn--small" data-story-nav="next">Next stage</button>
+<button type="button" class="btn btn--ghost btn--small" data-motiontoggle aria-controls="storystage"
+ aria-pressed="true" data-on="Pause" data-off="Play">Pause</button>
+</div>
+<div class="story__tally"><div><span class="micro">Steps performed by a person</span><span class="stat"><span class="from">6</span><span class="arrow">→</span><span class="to">1</span></span></div><div><span class="micro">Minutes per invoice</span><span class="stat"><span class="from">22</span><span class="arrow">→</span><span class="to">2</span></span></div><div><span class="micro">Handled without a touch</span><span class="stat"><span class="from">0%</span><span class="arrow">→</span><span class="to">~90%</span></span></div></div>
+</div>
+<div class="story__steps"><div class="story__step" data-step-i="0" data-phase="today" data-on="true"><span class="story__n">01</span><div><h3 class="d4">A document arrives</h3><p class="small" style="margin-top:.5rem">Email, portal and post, in every format. Nothing is structured yet.</p></div></div><div class="story__step" data-step-i="1" data-phase="today" data-on="false"><span class="story__n">02</span><div><h3 class="d4">Information is re-entered</h3><p class="small" style="margin-top:.5rem">A person reads it and types the contents into the ledger.</p></div></div><div class="story__step" data-step-i="2" data-phase="today" data-on="false"><span class="story__n">03</span><div><h3 class="d4">Approval waits</h3><p class="small" style="margin-top:.5rem">The request sits in an individual's inbox until it is noticed.</p></div></div><div class="story__step" data-step-i="3" data-phase="today" data-on="false"><span class="story__n">04</span><div><h3 class="d4">An exception occurs</h3><p class="small" style="margin-top:.5rem">A mismatch surfaces at month end, when correcting it costs most.</p></div></div><div class="story__step" data-step-i="4" data-phase="after" data-on="false"><span class="story__n">05</span><div><h3 class="d4">Systems are connected</h3><p class="small" style="margin-top:.5rem">Intake, matching and routing run once, against your own records.</p></div></div><div class="story__step" data-step-i="5" data-phase="after" data-on="false"><span class="story__n">06</span><div><h3 class="d4">Only the exception reaches a person</h3><p class="small" style="margin-top:.5rem">Everything resolvable resolves. Judgement gets a queue of its own.</p></div></div><div class="story__step" data-step-i="6" data-phase="after" data-on="false"><span class="story__n">07</span><div><h3 class="d4">The outcome is logged</h3><p class="small" style="margin-top:.5rem">The audit trail writes itself as the work completes.</p></div></div></div>
+</div>
+</div></section><section class="section bg-raised" id="estimator">
+<div class="wrap">
+<p class="kicker">The cost</p>
+<h2 class="d2 rv" style="margin-top:1.5rem;max-width:18ch">What repeated work may be costing you.</h2>
+<p class="lede rv" style="margin-top:1rem">Three figures. The full diagnostic adds assumptions, friction and suitability.</p>
+<div style="margin-top:clamp(2rem,4vw,3rem)"><div data-calc>
+<div class="panel panel--split rv">
+<div class="panel__in"><div class="ctrl"><div class="ctrl__top"><label for="people-home">People doing routine administrative work</label><output for="people-home" aria-live="off">12</output></div><input type="range" id="people-home" data-key="people" min="1" max="150" step="1" value="12" data-unit=""></div><div class="ctrl"><div class="ctrl__top"><label for="hours-home">Hours each, per week, on repeated tasks</label><output for="hours-home" aria-live="off">8 h</output></div><input type="range" id="hours-home" data-key="hours" min="1" max="30" step="1" value="8" data-unit=" h"></div><div class="ctrl"><div class="ctrl__top"><label for="rate-home">Fully loaded cost per hour</label><output for="rate-home" aria-live="off">550 kr</output></div><input type="range" id="rate-home" data-key="rate" min="250" max="1200" step="25" value="550" data-unit=" kr"></div><p class="small" style="margin-top:1.25rem"><a class="lnk" href="/diagnostic/">Advanced assumptions and full scoring<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p></div>
+<div class="panel__out">
+<div class="figures">
+<div class="figure figure--lead"><p class="micro">Repeated-work hours each year</p>
+<p class="stat"><span data-out="hours">4 416</span> <span style="font-size:.36em;letter-spacing:0">hours</span></p></div>
+<div class="figure"><p class="micro">Annual cost of that work</p><p class="stat" data-out="cost">kr 2.43 m</p></div>
+<div class="figure"><p class="micro">Equivalent full-time capacity</p><p class="stat"><span data-out="fte">2.6</span> FTE</p></div>
+</div>
+<div class="rows">
+<div><span>Indicative recoverable capacity</span><b class="is-accent" data-out="recover">1 050–1 850 h</b></div>
+
+</div>
+
+<p class="small" style="color:var(--t3);font-size:.8125rem">Illustrative estimate.</p>
+</div></div>
+
+</div></div>
+<div class="rv" style="margin-top:1.75rem;display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center">
+<a class="btn btn--primary" href="/diagnostic/">Run the full diagnostic<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<span class="tag">Planning range</span>
+</div>
+</div></section><section class="section bg-void">
+<div class="wrap">
+<p class="kicker">Capabilities</p>
+<h2 class="d2 rv" style="margin-top:1.5rem">Four things we do properly.</h2>
+<p class="lede rv" style="margin-top:1rem">Deliberately narrow. Adjacent work is taken on alongside a primary engagement, not sold on its own.</p>
+<div class="cards cards--2 cards--stagger" data-stagger style="margin-top:clamp(2.5rem,5vw,4rem)"><a class="card" href="/services/#discovery-redesign"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — process mapping on paper or whiteboard, overhead, dark exposure, wide crop]</span></div><div class="card__body"><span class="card__n">01</span><h3 class="d3">Process discovery and redesign</h3><p class="small" style="color:var(--t1)">Fix the work before you automate it.</p><p class="small">We map how work actually moves, then separate what is worth automating from what is worth deleting.</p><span class="card__link">Read more<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></a><a class="card" href="/services/#document-processing"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — invoice and document handling detail, shallow depth of field, dark exposure]</span></div><div class="card__body"><span class="card__n">02</span><h3 class="d3">Document and invoice processing</h3><p class="small" style="color:var(--t1)">Arrival to ledger, without retyping.</p><p class="small">Automated intake, extraction and matching, with one review queue for the cases a person needs to see.</p><span class="card__link">Read more<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></a><a class="card" href="/services/#reporting"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — finance screen or reporting environment, off-axis, dark exposure, tall crop]</span></div><div class="card__body"><span class="card__n">03</span><h3 class="d3">Reporting and management information</h3><p class="small" style="color:var(--t1)">One agreed set of numbers, on demand.</p><p class="small">Collection, reconciliation and variance detection into the format your board already reads.</p><span class="card__link">Read more<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></a><a class="card" href="/services/#integration"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — server, cabling or systems infrastructure detail, architectural crop, dark exposure]</span></div><div class="card__body"><span class="card__n">04</span><h3 class="d3">Systems integration and workflow automation</h3><p class="small" style="color:var(--t1)">Enter it once.</p><p class="small">Workflows connecting the systems you already own, so information moves once and arrives correct.</p><span class="card__link">Read more<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></a></div>
+</div></section><section class="section bg-base">
+<div class="wrap">
+<p class="kicker">The team</p>
+<h2 class="d2 rv" style="margin-top:1.5rem;max-width:16ch">Founder-led. Directly accountable.</h2>
+<p class="lede rv" style="margin-top:1rem">Anders leads each engagement from operational discovery through implementation. Morten supports research, testing, documentation and delivery.</p>
+<div class="team rv" style="margin-top:clamp(2rem,4vw,3rem)">
+<div class="team__card">
+<div class="media media--wide"><span class="media__tag">Portrait required</span><span class="media__label">[FOUNDER PORTRAIT REQUIRED — Anders Godfrey]</span></div>
+<div class="team__body">
+<p class="team__role">Founder · leads every engagement</p>
+<h3 class="d2">Anders Godfrey</h3>
+<p class="body" style="margin-top:.5rem">Anders is the principal founder and primary operator of AMG Advisory. He is the person you meet first, the person who maps your processes, and the person accountable for the work at the end of it.</p>
+<div class="team__resp"><h4>Directly responsible for</h4><ul class="tick"><li>Client relationships and acquisition</li><li>Discovery and business analysis</li><li>Process mapping and operational measurement</li><li>Business-case and commercial analysis</li><li>Solution scoping and AI opportunity assessment</li><li>Project coordination and delivery oversight</li><li>Implementation and stakeholder management</li><li>Adoption and quality control</li></ul></div>
+<div class="team__resp"><h4>Background</h4><p class="ph">[INSERT VERIFIED ANDERS BIOGRAPHY]</p></div>
+</div></div>
+<div class="team__card team__card--support">
+<div class="media media--square"><span class="media__tag">Portrait required</span><span class="media__label">[MORTEN PORTRAIT REQUIRED — Morten Godfrey]</span></div>
+<div class="team__body">
+<p class="team__role">Research, implementation and delivery support</p>
+<h3 class="d3">Morten Godfrey</h3>
+<p class="small" style="margin-top:.5rem">Morten supports research, testing, documentation and implementation across AMG engagements.</p>
+<div class="team__resp"><h4>Supports</h4><ul class="tick"><li>Process research and workflow documentation</li><li>Data preparation and solution testing</li><li>Quality assurance and documentation</li><li>Tool and approach research</li><li>Implementation support</li></ul></div>
+<div class="team__resp"><h4>Background</h4><p class="ph">[INSERT VERIFIED MORTEN BIOGRAPHY]</p></div>
+</div></div>
+</div>
+<div class="rv" style="margin-top:2rem;max-width:44rem">
+<p class="micro" style="color:var(--violet-text)">Current capacity</p>
+<p class="body" style="margin-top:.75rem">We deliberately accept a limited number of engagements. Anders leads the work directly, with structured support from Morten, and specialist input added only where the scope genuinely requires it.</p>
+<p class="small" style="margin-top:.75rem;color:var(--t1)">Current engagement model: one or two focused client projects at a time.</p>
+<p class="small" style="margin-top:1rem;color:var(--t3);font-size:.8125rem">Backgrounds and photography are marked as placeholders and will be published once verified.</p>
+</div>
+<p class="rv" style="margin-top:2rem"><a class="lnk" href="/about/">More about the practice<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+</div></section><section class="section light">
+<div class="wrap">
+<p class="kicker">Illustrative case model</p>
+<div style="display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;justify-content:space-between;margin-top:1.5rem">
+<h2 class="d2 rv">400 supplier invoices a month.</h2>
+<span class="tag tag--warn" style="border-color:rgba(255,106,75,.5)">Illustrative model — not an AMG client result.</span>
+</div>
+<p class="lede rv" style="margin-top:1rem">There are no client case studies to show yet, and inventing them would cost more than it earns. This is how the analysis runs.</p>
+<div class="rv rv--scale" style="margin-top:clamp(2rem,4vw,3rem)"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — warehouse or back-office operations, wide documentary crop, dark exposure]</span></div></div>
+<div class="case__grid rv" style="margin-top:clamp(2rem,4vw,3rem)"><div class="case__field"><h3>Current process</h3><p>Invoices arrive by three channels. One person matches each to a purchase order by hand, keys it into the ERP, routes it for approval, chases the approver, and files a copy.</p></div><div class="case__field"><h3>Operational friction</h3><p>Six manual steps, three systems, and an approval stage waiting on individual inboxes. Errors surface at month end.</p></div><div class="case__field"><h3>How we would measure it</h3><p>Time twenty real invoices end to end, including the ones that went wrong. Record touches, elapsed time and first-time match rate.</p></div><div class="case__field"><h3>Possible intervention</h3><p>Automated intake across all channels, line-level matching, approval routing with escalation, and a single exception queue.</p></div><div class="case__field"><h3>Metrics needing verification</h3><p>Invoices processed without a manual touch; days from receipt to approval; cost per invoice; discount capture.</p></div><div class="case__field"><h3>Risks and exceptions</h3><p>Non-standard supplier formats, credit notes, partial deliveries, and purchase orders raised after the invoice.</p></div><div class="case__field"><h3>What success looks like</h3><p>Most invoices complete without a person, the exception queue clears daily, and close is no longer gated by unmatched items.</p></div></div>
+<p class="rv" style="margin-top:2rem"><a class="lnk" href="/approach/">Four more process models<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+</div></section><section class="section interstitial">
+<div class="wrap">
+<div class="split split--reverse">
+<div class="split__media rv rv--scale"><div class="media media--square"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — Nordic operational or architectural environment, night, wide crop]</span></div></div>
+<div class="split__copy">
+<p class="kicker">Next step</p>
+<h2 class="d1 rv">Find out what your repeated work actually costs.</h2>
+<p class="lede rv">Forty-five minutes with Anders. No charge, no obligation, and an honest answer about whether the opportunity is large enough to be worth pursuing.</p>
+<div class="stage__actions rv">
+<a class="btn btn--onviolet" href="/contact/">Book an operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="lnk" style="color:#fff" href="mailto:hello@amgadvisory.no">hello@amgadvisory.no<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</div></div></div></section></main></div>
+<div class="pv-page" id="pv/services/" data-slug="services" hidden><main id="main-services"><section class="section--tight" style="padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem))">
+<div class="wrap">
+<p class="kicker">What we fix</p>
+<h1 class="d1 rv" style="max-width:18ch;margin-top:1.5rem">Four capabilities, defined by the work they remove.</h1>
+<p class="lede rv" style="margin-top:1.5rem">Every engagement is scoped against a process we have measured and quoted as a fixed price. The ranges below are planning assumptions for administrative process redesign. They are not results AMG has produced, not forecasts, and not guarantees. How success will be measured is agreed before anything is built.</p>
+
+</div></section><div class="wrap"><section class="section--tight" id="discovery-redesign" style="border-top:1px solid var(--line)">
+<div class="split">
+<div class="split__media rv rv--scale"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — process mapping on paper or whiteboard, overhead, dark exposure, wide crop]</span></div></div>
+<div class="split__copy">
+<p class="kicker">01 · Process discovery and redesign</p>
+<h2 class="d2 rv">Fix the work before you automate it.</h2>
+<p class="body rv"><strong style="color:var(--t1)">The problem.</strong> Work slows down between departments, not inside them. Handovers, approvals sitting in one inbox, the same question asked three times.</p>
+<p class="body rv"><strong style="color:var(--t1)">What we do.</strong> We map how work actually moves rather than how the procedure says it does, then separate the steps worth automating from the steps worth deleting. Automating a bad process only makes the error arrive faster.</p>
+<p class="body rv"><strong style="color:var(--t1)">The outcome.</strong> Shorter cycle times and fewer exceptions before a system is built — and a cheaper build when it comes.</p>
+<div class="rv" style="display:flex;flex-wrap:wrap;gap:.5rem">
+<span class="tag">Planning assumption: 10–30% cycle-time reduction from process change alone</span><span class="tag">3–5 weeks</span></div>
+<div class="rv"><p class="micro" style="margin-bottom:.75rem">What you get</p><ul class="tick"><li>Current-state process map</li><li>Time and cost per step</li><li>Exception and rework analysis</li><li>Prioritised change list</li></ul></div>
+</div></div></section><section class="section--tight" id="document-processing" style="border-top:1px solid var(--line)">
+<div class="split split--reverse">
+<div class="split__media rv rv--scale"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — invoice and document handling detail, shallow depth of field, dark exposure]</span></div></div>
+<div class="split__copy">
+<p class="kicker">02 · Document and invoice processing</p>
+<h2 class="d2 rv">Arrival to ledger, without retyping.</h2>
+<p class="body rv"><strong style="color:var(--t1)">The problem.</strong> Documents arrive in every format and by every channel. Someone reads each one, decides what it is, and types its contents into a system that could have received it directly.</p>
+<p class="body rv"><strong style="color:var(--t1)">What we do.</strong> Automated intake from email, portal and post; extraction of the fields that matter; matching against your own records; and a single review queue for the cases a person genuinely needs to see.</p>
+<p class="body rv"><strong style="color:var(--t1)">The outcome.</strong> Administrative hours returned, a complete audit trail, and a month-end that stops being an event.</p>
+<div class="rv" style="display:flex;flex-wrap:wrap;gap:.5rem">
+<span class="tag">Planning assumption: 60–90% of documents handled without a manual touch</span><span class="tag">6–10 weeks</span></div>
+<div class="rv"><p class="micro" style="margin-bottom:.75rem">What you get</p><ul class="tick"><li>Multi-channel intake</li><li>Field extraction with confidence thresholds</li><li>Exception review queue</li><li>Full audit log</li></ul></div>
+</div></div></section><section class="section--tight" id="reporting" style="border-top:1px solid var(--line)">
+<div class="split">
+<div class="split__media rv rv--scale"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — finance screen or reporting environment, off-axis, dark exposure, tall crop]</span></div></div>
+<div class="split__copy">
+<p class="kicker">03 · Reporting and management information</p>
+<h2 class="d2 rv">One agreed set of numbers, on demand.</h2>
+<p class="body rv"><strong style="color:var(--t1)">The problem.</strong> The monthly pack takes days to assemble and is out of date when it is read. Two departments arrive at the meeting with different figures for the same thing.</p>
+<p class="body rv"><strong style="color:var(--t1)">What we do.</strong> Automated collection, reconciliation and variance detection, running from your source systems into the format your board already uses, with a drafted commentary your analysts review rather than write.</p>
+<p class="body rv"><strong style="color:var(--t1)">The outcome.</strong> Management information available when it is needed, from one set of numbers nobody has to defend.</p>
+<div class="rv" style="display:flex;flex-wrap:wrap;gap:.5rem">
+<span class="tag">Planning assumption: 3–5 finance days recovered each month</span><span class="tag">4–6 weeks</span></div>
+<div class="rv"><p class="micro" style="margin-bottom:.75rem">What you get</p><ul class="tick"><li>Automated collection and reconciliation</li><li>Variance detection</li><li>Drafted commentary for review</li><li>Scheduled and on-demand distribution</li></ul></div>
+</div></div></section><section class="section--tight" id="integration" style="border-top:1px solid var(--line)">
+<div class="split split--reverse">
+<div class="split__media rv rv--scale"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — server, cabling or systems infrastructure detail, architectural crop, dark exposure]</span></div></div>
+<div class="split__copy">
+<p class="kicker">04 · Systems integration and workflow automation</p>
+<h2 class="d2 rv">Enter it once.</h2>
+<p class="body rv"><strong style="color:var(--t1)">The problem.</strong> The same data is keyed into three systems by three people, and the discrepancies are found at month end by a fourth.</p>
+<p class="body rv"><strong style="color:var(--t1)">What we do.</strong> Bespoke workflows connecting the systems you already own — ERP, accounting, CRM, document stores, email — so information moves once and arrives correct.</p>
+<p class="body rv"><strong style="color:var(--t1)">The outcome.</strong> Reconciliation stops being a task. The audit trail writes itself.</p>
+<div class="rv" style="display:flex;flex-wrap:wrap;gap:.5rem">
+<span class="tag">Planning assumption: payback within the first year, established during Discovery</span><span class="tag">4–8 weeks per workflow</span></div>
+<div class="rv"><p class="micro" style="margin-bottom:.75rem">What you get</p><ul class="tick"><li>End-to-end workflow</li><li>Exception handling and alerts</li><li>Audit log on every action</li><li>Handover documentation</li></ul></div>
+</div></div></section></div><section class="section bg-void"><div class="wrap">
+<p class="kicker">Adjacent use cases</p>
+<h2 class="d2 rv" style="margin-top:1.5rem">Work we take on alongside a primary engagement.</h2>
+<p class="lede rv" style="margin-top:1rem">Taken on alongside a primary engagement, not as standalone specialisms.</p>
+<div class="cards cards--2" data-stagger style="margin-top:clamp(2rem,4vw,3rem)"><div><h3 class="d4">Internal knowledge</h3><p class="small" style="margin-top:.5rem">An assistant grounded strictly in your own documents, with permissions that mirror your organisation and a citation on every answer.</p></div><div><h3 class="d4">Proposal support</h3><p class="small" style="margin-top:.5rem">A first draft built from your own approved precedents and pricing rules, for an expert to edit rather than write.</p></div><div><h3 class="d4">Customer administration</h3><p class="small" style="margin-top:.5rem">Triage, routing and status updates on high-volume, repetitive customer correspondence.</p></div><div><h3 class="d4">Supplier administration</h3><p class="small" style="margin-top:.5rem">Onboarding, price file handling and the long tail of supplier correspondence.</p></div><div><h3 class="d4">AI-assisted document drafting</h3><p class="small" style="margin-top:.5rem">Structured first drafts of recurring documents, always reviewed by the person who signs them.</p></div></div>
+</div></section><section class="section bg-raised" id="where-we-fit"><div class="wrap">
+<p class="kicker">Where we fit</p>
+<h2 class="d2 rv" style="margin-top:1.5rem;max-width:18ch">We look for a shape of problem, not a sector.</h2>
+<p class="lede rv" style="margin-top:1rem">This work suits organisations with a particular operational profile. That profile matters far more than the industry it sits in — the vocabulary changes, the pattern rarely does.</p>
+<div class="cards cards--2" data-stagger style="margin-top:clamp(2rem,4vw,3rem)"><div><span class="card__n">01</span><h3 class="d4" style="margin-top:.5rem">Manual administrative volume</h3><p class="small" style="margin-top:.5rem">Repetitive work happening at a scale where minutes per case compound into a meaningful annual figure.</p></div><div><span class="card__n">02</span><h3 class="d4" style="margin-top:.5rem">Fragmented systems</h3><p class="small" style="margin-top:.5rem">Several systems that hold overlapping information and do not talk to each other, bridged by people.</p></div><div><span class="card__n">03</span><h3 class="d4" style="margin-top:.5rem">Repeated reporting</h3><p class="small" style="margin-top:.5rem">The same figures assembled by hand on a fixed cycle, from sources that have to be reconciled first.</p></div><div><span class="card__n">04</span><h3 class="d4" style="margin-top:.5rem">Document-heavy work</h3><p class="small" style="margin-top:.5rem">Information that arrives as documents and has to be read, interpreted and entered before it can be used.</p></div><div><span class="card__n">05</span><h3 class="d4" style="margin-top:.5rem">Coordination-heavy processes</h3><p class="small" style="margin-top:.5rem">Work that crosses several people or teams, where the waiting is longer than the doing.</p></div><div><span class="card__n">06</span><h3 class="d4" style="margin-top:.5rem">Headcount that grows with volume</h3><p class="small" style="margin-top:.5rem">Administrative effort scaling in step with transactions, so growth costs margin.</p></div></div>
+<div class="rv" style="margin-top:clamp(2.5rem,5vw,4rem);border-top:1px solid var(--line);padding-top:2rem">
+<p class="micro">Sectors where this profile is common</p>
+<ul class="tick" style="grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));display:grid;gap:.5rem 2rem;margin-top:1rem"><li>Accounting practices</li><li>Construction and trades</li><li>Manufacturing</li><li>Professional services</li><li>Logistics and distribution</li><li>Wholesale and retail</li><li>Property and asset management</li><li>Recruitment</li></ul>
+<p class="small" style="margin-top:1.5rem;color:var(--t3);max-width:46rem">These are sectors where the profile above recurs — not sectors in which AMG claims established specialism. We have deliberately not listed regulated healthcare, regulated financial services or the public sector: each carries obligations we would not take on without the specialist evidence to support it.</p>
+</div></div></section><section class="section interstitial">
+<div class="wrap">
+<div class="split split--reverse">
+<div class="split__media rv rv--scale"><div class="media media--square"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — Nordic operational or architectural environment, night, wide crop]</span></div></div>
+<div class="split__copy">
+<p class="kicker">Next step</p>
+<h2 class="d1 rv">Find out what your repeated work actually costs.</h2>
+<p class="lede rv">Forty-five minutes with Anders. No charge, no obligation, and an honest answer about whether the opportunity is large enough to be worth pursuing.</p>
+<div class="stage__actions rv">
+<a class="btn btn--onviolet" href="/contact/">Book an operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="lnk" style="color:#fff" href="mailto:hello@amgadvisory.no">hello@amgadvisory.no<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</div></div></div></section></main></div>
+<div class="pv-page" id="pv/approach/" data-slug="approach" hidden><main id="main-approach"><section class="section--tight" style="padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem))">
+<div class="wrap">
+<p class="kicker">How we work</p>
+<h1 class="d1 rv" style="max-width:18ch;margin-top:1.5rem">A method designed so you can stop at any point.</h1>
+<p class="lede rv" style="margin-top:1.5rem">Most consultancy risk comes from committing to an outcome before anyone has measured the problem. Each phase is short, separately priced, and leaves you with something of independent value.</p>
+<div class="rv rv--scale" style="margin-top:clamp(2rem,4vw,3rem)"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — close-up of physical filing or invoice batch, dark exposure, wide crop]</span></div></div>
+</div></section><section class="section--tight"><div class="wrap"><div class="spine"><div class="phase"><span class="phase__dot" aria-hidden="true">01</span><div><h2 class="d3">Discover</h2><p class="micro" style="margin-top:.5rem">2–4 weeks</p></div><div style="display:grid;gap:.75rem"><p class="d4" style="font-weight:500">We spend time inside the operation.</p><p class="body">We sit with the people doing the work and follow each process from first trigger to last handover, recording every manual step, exception and workaround. Then we put numbers against it: hours per month, cost per transaction, error rate, time spent waiting.</p><p class="small" style="color:var(--t3)">You keep the process map and the baseline, whether or not you continue.</p></div></div><div class="phase"><span class="phase__dot" aria-hidden="true">02</span><div><h2 class="d3">Design</h2><p class="micro" style="margin-top:.5rem">1–2 weeks</p></div><div style="display:grid;gap:.75rem"><p class="d4" style="font-weight:500">We decide what is worth changing.</p><p class="body">Not everything should be automated. We rank opportunities by hours returned against effort and risk, design the target process, and agree how success will be measured before a line of code exists.</p><p class="small" style="color:var(--t3)">A prioritised plan, with fixed scope and fixed price per phase.</p></div></div><div class="phase"><span class="phase__dot" aria-hidden="true">03</span><div><h2 class="d3">Build</h2><p class="micro" style="margin-top:.5rem">4–12 weeks</p></div><div style="display:grid;gap:.75rem"><p class="d4" style="font-weight:500">We build in short cycles, in your environment.</p><p class="body">Systems are built around the tools you already run rather than replacing them. You see working software in the first fortnight and every fortnight after, so direction can change while changing it is still cheap.</p><p class="small" style="color:var(--t3)">Working software, your infrastructure, your accounts, your code.</p></div></div><div class="phase"><span class="phase__dot" aria-hidden="true">04</span><div><h2 class="d3">Deploy</h2><p class="micro" style="margin-top:.5rem">1–2 weeks</p></div><div style="display:grid;gap:.75rem"><p class="d4" style="font-weight:500">The old process keeps running until the new one has earned its place.</p><p class="body">We run both in parallel and compare outputs until the numbers agree. Training happens inside the team's own workflow, not in a room, and every deployment keeps a documented manual fallback.</p><p class="small" style="color:var(--t3)">A live system, a trained team, and a way back.</p></div></div><div class="phase"><span class="phase__dot" aria-hidden="true">05</span><div><h2 class="d3">Improve</h2><p class="micro" style="margin-top:.5rem">Ongoing, optional</p></div><div style="display:grid;gap:.75rem"><p class="d4" style="font-weight:500">We report against the baseline we agreed at the start.</p><p class="body">Every month we compare performance to the Discovery baseline and act on the gap. When there is nothing useful left to do, we say so and stop, rather than finding new reasons to stay.</p><p class="small" style="color:var(--t3)">A short monthly report, including the parts that did not work.</p></div></div></div></div></section><section class="section bg-void"><div class="wrap">
+<p class="kicker">Illustrative operational cases</p>
+<h2 class="d2 rv" style="margin-top:1.5rem">Five process models, worked through end to end.</h2>
+<p class="lede rv" style="margin-top:1rem">AMG Advisory is a new consultancy. There are no client case studies to show, and inventing them would be the fastest way to lose the trust this site is built on. What follows is how we think: five common process shapes, each taken through the same analysis we would apply to yours.</p>
+<div data-carousel style="margin-top:clamp(2rem,4vw,3rem)">
+<div data-carousel-track style="display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;-webkit-overflow-scrolling:touch"><article class="card" data-slide style="min-width:min(90vw,34rem);scroll-snap-align:start"><div class="card__body"><span class="card__n">Finance</span><h3 class="d3">400 monthly supplier invoices</h3><span class="tag tag--warn" style="justify-self:start">Illustrative model</span><div style="display:grid;gap:1rem;margin-top:.75rem"><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Current process</h4><p class="small">Invoices arrive by email, supplier portal and post. One person opens each, matches it to a purchase order by hand, keys it into the ERP, routes it for approval, chases the approver, and files a copy.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Operational friction</h4><p class="small">Six manual steps per invoice, three systems, and an approval stage that waits on individual inboxes. Errors surface at month end, when correcting them is most expensive.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">How we would measure it</h4><p class="small">Time twenty real invoices end to end, including the ones that went wrong. Record touches, elapsed time, and the proportion that failed to match first time.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Possible intervention</h4><p class="small">Automated intake across all three channels, line-level matching against purchase orders, approval routing with escalation, and a single exception queue.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Metrics that would need verifying</h4><p class="small">Invoices processed without a manual touch; days from receipt to approval; cost per invoice; discount capture rate; first-time match rate.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Risks and exceptions</h4><p class="small">Non-standard supplier formats, credit notes, partial deliveries, and purchase orders raised after the invoice arrives. Each needs a defined path before go-live.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">What a successful result would look like</h4><p class="small">The majority of invoices complete without a person, the exception queue is small enough to clear daily, and close is no longer gated by unmatched items.</p></div></div></div></article><article class="card" data-slide style="min-width:min(90vw,34rem);scroll-snap-align:start"><div class="card__body"><span class="card__n">Finance</span><h3 class="d3">Monthly management reporting</h3><span class="tag tag--warn" style="justify-self:start">Illustrative model</span><div style="display:grid;gap:1rem;margin-top:.75rem"><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Current process</h4><p class="small">Figures are exported from several systems, reconciled in a spreadsheet, formatted by one person who knows the template, and circulated with commentary written last.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Operational friction</h4><p class="small">Three to five finance days per cycle, a single-person dependency on the template, and departments arriving at meetings with different numbers.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">How we would measure it</h4><p class="small">Record elapsed hours per close over two cycles, by activity: extraction, reconciliation, formatting, commentary, distribution.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Possible intervention</h4><p class="small">Automated collection and reconciliation from each source, variance detection, and a drafted commentary the analyst edits rather than writes.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Metrics that would need verifying</h4><p class="small">Finance days consumed per close; working days from period end to issue; number of restatements after issue; number of competing figures in circulation.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Risks and exceptions</h4><p class="small">Source systems that disagree by design, late adjustments, and definitions of the same metric that differ between departments. Definitions must be agreed before automation, not after.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">What a successful result would look like</h4><p class="small">The pack issues in one day from one agreed set of numbers, and the analyst's time moves from assembly to interpretation.</p></div></div></div></article><article class="card" data-slide style="min-width:min(90vw,34rem);scroll-snap-align:start"><div class="card__body"><span class="card__n">Operations</span><h3 class="d3">Shared customer-service inbox</h3><span class="tag tag--warn" style="justify-self:start">Illustrative model</span><div style="display:grid;gap:1rem;margin-top:.75rem"><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Current process</h4><p class="small">A shared mailbox receives a high volume of repetitive enquiries. Staff read each one, decide who it belongs to, look up an answer, and reply.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Operational friction</h4><p class="small">Triage consumes more time than answering. Response times vary by who is on duty, and there is no reliable record of what was asked most often.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">How we would measure it</h4><p class="small">Categorise a fortnight of real messages. Record volume by type, time to first response, and the share answerable from existing documented sources.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Possible intervention</h4><p class="small">Automated classification and routing, drafted replies for the highest-volume categories, and a review step before anything is sent.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Metrics that would need verifying</h4><p class="small">Time to first response; share auto-classified correctly; share of drafts sent without material edit; reopen rate.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Risks and exceptions</h4><p class="small">Complaints, vulnerable customers and anything with legal implications must be routed to a person by rule, not by classifier confidence.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">What a successful result would look like</h4><p class="small">Routine enquiries answer quickly and consistently, and staff time concentrates on the cases that genuinely need a person.</p></div></div></div></article><article class="card" data-slide style="min-width:min(90vw,34rem);scroll-snap-align:start"><div class="card__body"><span class="card__n">Knowledge</span><h3 class="d3">Contract and policy retrieval</h3><span class="tag tag--warn" style="justify-self:start">Illustrative model</span><div style="display:grid;gap:1rem;margin-top:.75rem"><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Current process</h4><p class="small">Answers live in signed contracts, policy documents and project folders. People ask a colleague because searching is slower than asking.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Operational friction</h4><p class="small">Interruptions concentrate on a small number of experienced staff. Answers vary by who is asked, and nothing is traceable to a source.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">How we would measure it</h4><p class="small">Log questions asked of the three most-interrupted people for two weeks: volume, category, time to answer, and whether the answer existed in a document.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Possible intervention</h4><p class="small">An internal assistant grounded strictly in approved documents, with permissions mirroring the organisation and a citation on every answer.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Metrics that would need verifying</h4><p class="small">Questions answered without a colleague; citation accuracy on a sampled set; interruption volume for the named individuals; time to answer.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Risks and exceptions</h4><p class="small">Superseded document versions, permission boundaries, and confident answers drawn from outdated policy. Version control has to be resolved first.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">What a successful result would look like</h4><p class="small">Staff self-serve most routine questions with a traceable source, and senior interruptions fall measurably.</p></div></div></div></article><article class="card" data-slide style="min-width:min(90vw,34rem);scroll-snap-align:start"><div class="card__body"><span class="card__n">Operations</span><h3 class="d3">Multi-system customer onboarding</h3><span class="tag tag--warn" style="justify-self:start">Illustrative model</span><div style="display:grid;gap:1rem;margin-top:.75rem"><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Current process</h4><p class="small">A new customer is set up across a CRM, a finance system and an operational platform, with documents collected by email and checks recorded in a spreadsheet.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Operational friction</h4><p class="small">The same details are entered three times, status is invisible between teams, and onboarding stalls without anyone noticing until the customer asks.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">How we would measure it</h4><p class="small">Track twenty onboardings end to end: elapsed days, touches per case, re-entry count, and where each one waited longest.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Possible intervention</h4><p class="small">One intake point feeding all three systems, automated document chasing, and a shared status view with alerts when a case stops moving.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Metrics that would need verifying</h4><p class="small">Elapsed days to fully onboarded; re-entry count per case; proportion stalled beyond an agreed threshold; error rate at first billing.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">Risks and exceptions</h4><p class="small">Regulatory checks that must remain human, incomplete customer submissions, and systems without a usable interface. Each constrains the design.</p></div><div class="case__field"><h4 style="font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-text);margin-bottom:.5rem">What a successful result would look like</h4><p class="small">Details are entered once, status is visible to everyone who needs it, and stalled cases surface automatically rather than on complaint.</p></div></div></div></article></div>
+<div style="display:flex;gap:.625rem;align-items:center;margin-top:1rem">
+<button type="button" class="btn btn--ghost btn--small" data-carousel-nav="prev" aria-label="Previous case model">Previous</button>
+<button type="button" class="btn btn--ghost btn--small" data-carousel-nav="next" aria-label="Next case model">Next</button>
+<span class="micro" data-carousel-pos aria-live="polite">1 / 5</span>
+</div></div></div></section><section class="section bg-base"><div class="wrap">
+<p class="kicker">Questions</p>
+<h2 class="d2 rv" style="margin-top:1.5rem">The things asked before committing.</h2>
+<div class="acc rv" style="margin-top:clamp(2rem,4vw,3rem)"><details><summary><span>Do we need our data in order before we start?</span><span class="sign" aria-hidden="true"></span></summary><div class="acc__panel"><p class="body" style="max-width:46rem">No. Data quality is the most common reason given for postponing this kind of work. Discovery establishes what state things are actually in, and where data quality genuinely blocks an opportunity we say so and price that work separately rather than hiding it inside a build.</p></div></details><details><summary><span>What does an engagement cost?</span><span class="sign" aria-hidden="true"></span></summary><div class="acc__panel"><p class="body" style="max-width:46rem">Discovery is a fixed fee based on the number of processes in scope and typically runs two to four weeks. Build phases are quoted individually once scope is agreed, so you always know the cost of the next step before committing to it. We do not work on open-ended time and materials.</p></div></details><details><summary><span>How do you handle data protection and GDPR?</span><span class="sign" aria-hidden="true"></span></summary><div class="acc__panel"><p class="body" style="max-width:46rem">We work inside your existing infrastructure and data residency requirements. Where a system processes personal data we document the lawful basis, minimise what is retained, and provide the technical detail your DPO needs for the processing record. Where an EU or Norwegian hosting requirement applies, we architect for it rather than around it.</p></div></details><details><summary><span>We already have Microsoft 365 and Copilot. Do we need anything else?</span><span class="sign" aria-hidden="true"></span></summary><div class="acc__panel"><p class="body" style="max-width:46rem">Possibly not, and we will tell you when a licence you already hold covers the need. General assistants help individuals work faster. They do not remove a process, because they do not connect your systems, enforce your rules or carry an audit trail. That is the gap this work is aimed at.</p></div></details><details><summary><span>Will this cost people their jobs?</span><span class="sign" aria-hidden="true"></span></summary><div class="acc__panel"><p class="body" style="max-width:46rem">That decision is yours, and you should make it deliberately rather than discover it. The honest pattern in this kind of work is that repetitive administrative tasks disappear and the roles built around them change. The organisations this suits are usually trying to absorb growth without hiring. We will not pretend the question does not exist.</p></div></details><details><summary><span>What happens when the system gets something wrong?</span><span class="sign" aria-hidden="true"></span></summary><div class="acc__panel"><p class="body" style="max-width:46rem">It is designed to be wrong safely. Every system has confidence thresholds, an exception queue, a named owner, and a logged decision trail. Cases the system is not certain about go to a person by design, and accuracy is reported monthly rather than when asked.</p></div></details><details><summary><span>Do we need technical people internally?</span><span class="sign" aria-hidden="true"></span></summary><div class="acc__panel"><p class="body" style="max-width:46rem">Not to run what we build. You need one person who can make decisions about the process and one who can approve access. If you have an IT function we work with them; if you do not, we handle the environment and hand it over documented.</p></div></details><details><summary><span>You are a new firm. Why should we take the risk?</span><span class="sign" aria-hidden="true"></span></summary><div class="acc__panel"><p class="body" style="max-width:46rem">Because the engagement is structured so that you do not have to take much of one. Start with Discovery: a short, fixed-price piece of analysis that leaves you with a process map, a cost baseline and a ranked list of opportunities, all of which have value even if you never work with us again. Judge the thinking before you commit to a build.</p></div></details></div>
+</div></section><section class="section interstitial">
+<div class="wrap">
+<div class="split split--reverse">
+<div class="split__media rv rv--scale"><div class="media media--square"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — Nordic operational or architectural environment, night, wide crop]</span></div></div>
+<div class="split__copy">
+<p class="kicker">Next step</p>
+<h2 class="d1 rv">Find out what your repeated work actually costs.</h2>
+<p class="lede rv">Forty-five minutes with Anders. No charge, no obligation, and an honest answer about whether the opportunity is large enough to be worth pursuing.</p>
+<div class="stage__actions rv">
+<a class="btn btn--onviolet" href="/contact/">Book an operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="lnk" style="color:#fff" href="mailto:hello@amgadvisory.no">hello@amgadvisory.no<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</div></div></div></section></main></div>
+<div class="pv-page" id="pv/diagnostic/" data-slug="diagnostic" hidden><main id="main-diagnostic"><section class="section--tight" style="padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem))">
+<div class="wrap">
+<p class="kicker">Diagnostic</p>
+<h1 class="d1 rv" style="max-width:18ch;margin-top:1.5rem">Four questions worth answering before you spend anything.</h1>
+<p class="lede rv" style="margin-top:1.5rem">A cost estimate, a friction score, a suitability check and a combined summary. Everything runs in this browser tab and nothing is transmitted.</p>
+
+</div></section><section class="section--tight"><div class="wrap">
+<div class="stepper" data-stepper data-of="Step {n} of 4">
+<div class="stepper__bar">
+<span class="micro" data-steplabel aria-live="polite">Step 1 of 4</span>
+<div class="stepper__track" aria-hidden="true"><span class="stepper__seg" data-seg data-on="true"></span><span class="stepper__seg" data-seg data-on="false"></span><span class="stepper__seg" data-seg data-on="false"></span><span class="stepper__seg" data-seg data-on="false"></span></div>
+</div>
+<div class="stepnames" aria-hidden="true"><span data-stepname data-on="true">1. Estimate cost</span><span data-stepname data-on="false">2. Assess friction</span><span data-stepname data-on="false">3. Assess suitability</span><span data-stepname data-on="false">4. Review summary</span></div>
+<div data-step>
+<h2 class="d3">Estimate cost</h2>
+<p class="body" style="margin-top:.75rem">Three figures to start. Adjust the assumptions if you want to be more precise. Everything here is arithmetic on numbers you enter — it is a starting point for a conversation, not a finding.</p>
+<div style="margin-top:2rem"><div data-calc>
+<div class="panel panel--split rv">
+<div class="panel__in"><div class="ctrl"><div class="ctrl__top"><label for="people-diag">People doing routine administrative work</label><output for="people-diag" aria-live="off">12</output></div><input type="range" id="people-diag" data-key="people" min="1" max="150" step="1" value="12" data-unit=""></div><div class="ctrl"><div class="ctrl__top"><label for="hours-diag">Hours each, per week, on repeated tasks</label><output for="hours-diag" aria-live="off">8 h</output></div><input type="range" id="hours-diag" data-key="hours" min="1" max="30" step="1" value="8" data-unit=" h"></div><div class="ctrl"><div class="ctrl__top"><label for="rate-diag">Fully loaded cost per hour</label><output for="rate-diag" aria-live="off">550 kr</output></div><input type="range" id="rate-diag" data-key="rate" min="250" max="1200" step="25" value="550" data-unit=" kr"></div><details class="disc" style="margin-top:1.25rem"><summary>Advanced assumptions<span class="sign" aria-hidden="true"></span></summary><div class="disc__body"><p class="small" style="margin-bottom:1rem">These refine the recovery range. Rule-based share and rework rate move it most: work with consistent rules and high error correction is where redesign usually has the most room.</p><div class="ctrl"><div class="ctrl__top"><label for="weeks-diag">Working weeks per year</label><output for="weeks-diag" aria-live="off">46</output></div><input type="range" id="weeks-diag" data-key="weeks" min="40" max="52" step="1" value="46" data-unit=""></div><div class="ctrl"><div class="ctrl__top"><label for="rules-diag">Share of the work that is rule-based</label><output for="rules-diag" aria-live="off">60%</output></div><input type="range" id="rules-diag" data-key="rules" min="10" max="95" step="5" value="60" data-unit="%"></div><div class="ctrl"><div class="ctrl__top"><label for="rework-diag">Work redone because of errors</label><output for="rework-diag" aria-live="off">6%</output></div><input type="range" id="rework-diag" data-key="rework" min="0" max="25" step="1" value="6" data-unit="%"></div><div class="ctrl"><div class="ctrl__top"><label for="growth-diag">Expected annual volume growth</label><output for="growth-diag" aria-live="off">8%</output></div><input type="range" id="growth-diag" data-key="growth" min="0" max="30" step="1" value="8" data-unit="%"></div><div class="ctrl"><div class="ctrl__top"><label for="systems-diag">Systems the process touches</label><output for="systems-diag" aria-live="off">4</output></div><input type="range" id="systems-diag" data-key="systems" min="1" max="12" step="1" value="4" data-unit=""></div><div class="ctrl"><div class="ctrl__top"><label for="handoffs-diag">Handoffs between people or teams</label><output for="handoffs-diag" aria-live="off">3</output></div><input type="range" id="handoffs-diag" data-key="handoffs" min="0" max="12" step="1" value="3" data-unit=""></div><div class="ctrl"><div class="ctrl__top"><label for="delay-diag">Average approval delay</label><output for="delay-diag" aria-live="off">2 days</output></div><input type="range" id="delay-diag" data-key="delay" min="0" max="10" step="1" value="2" data-unit=" days"></div></div></details><details class="disc"><summary>How this estimate works<span class="sign" aria-hidden="true"></span></summary><div class="disc__body"><dl><dt>Working year</dt><dd>Hours are calculated as people × hours per week × working weeks. The default is 46 weeks, which allows for holiday and public holidays.</dd><dt>Full-time equivalent</dt><dd>One FTE is taken as 1,725 hours per year — 37.5 hours over 46 weeks. Adjust the working weeks if your convention differs.</dd><dt>Recovery scenarios</dt><dd>The low, central and high figures are derived from the share of work you describe as rule-based, adjusted for the rework rate. They are planning assumptions for administrative process redesign. They are not results AMG has produced, and they are not a forecast for your organisation.</dd><dt>Cost assumptions</dt><dd>Cost uses the fully loaded hourly figure you enter, which should include employer's contributions, pension, holiday pay and overhead — not gross salary.</dd><dt>Growth</dt><dd>The three-year view compounds your volume growth figure and assumes administrative effort scales with volume, which is the pattern this work is designed to break.</dd><dt>What replaces this</dt><dd>Discovery replaces every assumption above with observed time, recorded from the actual process. That is the only figure worth committing budget against.</dd></dl></div></details></div>
+<div class="panel__out">
+<div class="figures">
+<div class="figure figure--lead"><p class="micro">Repeated-work hours each year</p>
+<p class="stat"><span data-out="hours">4 416</span> <span style="font-size:.36em;letter-spacing:0">hours</span></p></div>
+<div class="figure"><p class="micro">Annual cost of that work</p><p class="stat" data-out="cost">kr 2.43 m</p></div>
+<div class="figure"><p class="micro">Equivalent full-time capacity</p><p class="stat"><span data-out="fte">2.6</span> FTE</p></div>
+</div>
+<div class="rows">
+<div><span>Indicative recoverable capacity</span><b class="is-accent" data-out="recover">1 050–1 850 h</b></div>
+<div><span>Value of that capacity</span><b class="is-accent" data-out="value">kr 568 000–kr 1.01 m</b></div><div><span>Cost of doing nothing over three years</span><b class="is-warn" data-out="three">kr 7.88 m</b></div>
+</div>
+<div><p class="micro" style="margin-bottom:.75rem">Where the year goes, at the assumptions entered</p><div class="bars"><div class="bar " data-bar="retained"><div class="bar__top"><span>Work that would remain</span><b data-barval>—</b></div><div class="bar__track" aria-hidden="true"><div class="bar__fill" style="width:0%"></div></div></div><div class="bar bar--accent" data-bar="recover"><div class="bar__top"><span>Indicatively recoverable</span><b data-barval>—</b></div><div class="bar__track" aria-hidden="true"><div class="bar__fill" style="width:0%"></div></div></div><div class="bar bar--warn" data-bar="growth"><div class="bar__top"><span>Added by volume growth over three years</span><b data-barval>—</b></div><div class="bar__track" aria-hidden="true"><div class="bar__fill" style="width:0%"></div></div></div></div></div>
+<p class="small" style="color:var(--t3);font-size:.8125rem">Illustrative estimate.</p>
+</div></div>
+<div class="summary rv" style="margin-top:1.25rem"><p class="micro" style="color:var(--violet-text);margin-bottom:.625rem">Result summary</p><p data-summary>—</p><div class="summary__row"><button type="button" class="btn btn--ghost btn--small" data-copy="Summary copied.">Copy summary</button><button type="button" class="btn btn--ghost btn--small" data-print>Print result</button><span class="pending">PDF export and send-with-enquiry are not built.</span><span class="small" role="status" data-copystatus></span></div></div>
+</div></div></div><div data-step hidden>
+<h2 class="d3">Process friction score.</h2>
+<p class="body" style="margin-top:.75rem">Seven questions about one process. The result indicates where friction concentrates and what to measure first. It is an orientation tool, not an assessment.</p>
+<div style="margin-top:2rem">
+<div class="panel panel--split rv" data-friction>
+<div class="panel__in"><div class="qs"><fieldset class="q" data-q="systems"><legend>How many systems does the process touch?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="fr-systems" id="fr-systems-0" value="0"><label for="fr-systems-0">1–2</label></span><span class="q__opt"><input type="radio" name="fr-systems" id="fr-systems-1" value="2"><label for="fr-systems-1">3–4</label></span><span class="q__opt"><input type="radio" name="fr-systems" id="fr-systems-2" value="3"><label for="fr-systems-2">5 or more</label></span></div></fieldset><fieldset class="q" data-q="reentry"><legend>How often is the same information re-entered?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="fr-reentry" id="fr-reentry-0" value="0"><label for="fr-reentry-0">Rarely</label></span><span class="q__opt"><input type="radio" name="fr-reentry" id="fr-reentry-1" value="2"><label for="fr-reentry-1">Sometimes</label></span><span class="q__opt"><input type="radio" name="fr-reentry" id="fr-reentry-2" value="3"><label for="fr-reentry-2">Routinely</label></span></div></fieldset><fieldset class="q" data-q="approvals"><legend>How many approval stages are there?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="fr-approvals" id="fr-approvals-0" value="0"><label for="fr-approvals-0">None or one</label></span><span class="q__opt"><input type="radio" name="fr-approvals" id="fr-approvals-1" value="2"><label for="fr-approvals-1">Two or three</label></span><span class="q__opt"><input type="radio" name="fr-approvals" id="fr-approvals-2" value="3"><label for="fr-approvals-2">Four or more</label></span></div></fieldset><fieldset class="q" data-q="keyperson"><legend>Does the process depend on one person?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="fr-keyperson" id="fr-keyperson-0" value="0"><label for="fr-keyperson-0">No</label></span><span class="q__opt"><input type="radio" name="fr-keyperson" id="fr-keyperson-1" value="2"><label for="fr-keyperson-1">Partly</label></span><span class="q__opt"><input type="radio" name="fr-keyperson" id="fr-keyperson-2" value="3"><label for="fr-keyperson-2">Entirely</label></span></div></fieldset><fieldset class="q" data-q="exceptions"><legend>How are exceptions handled?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="fr-exceptions" id="fr-exceptions-0" value="0"><label for="fr-exceptions-0">Defined and logged</label></span><span class="q__opt"><input type="radio" name="fr-exceptions" id="fr-exceptions-1" value="2"><label for="fr-exceptions-1">Case by case</label></span><span class="q__opt"><input type="radio" name="fr-exceptions" id="fr-exceptions-2" value="3"><label for="fr-exceptions-2">Ad hoc, undocumented</label></span></div></fieldset><fieldset class="q" data-q="reporting"><legend>How long does reporting on this process take?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="fr-reporting" id="fr-reporting-0" value="0"><label for="fr-reporting-0">Minutes</label></span><span class="q__opt"><input type="radio" name="fr-reporting" id="fr-reporting-1" value="2"><label for="fr-reporting-1">Hours</label></span><span class="q__opt"><input type="radio" name="fr-reporting" id="fr-reporting-2" value="3"><label for="fr-reporting-2">Days</label></span></div></fieldset><fieldset class="q" data-q="scaling"><legend>Does more volume require more people?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="fr-scaling" id="fr-scaling-0" value="0"><label for="fr-scaling-0">No</label></span><span class="q__opt"><input type="radio" name="fr-scaling" id="fr-scaling-1" value="2"><label for="fr-scaling-1">Somewhat</label></span><span class="q__opt"><input type="radio" name="fr-scaling" id="fr-scaling-2" value="3"><label for="fr-scaling-2">Directly</label></span></div></fieldset></div></div>
+<div class="panel__out">
+<div class="verdict" data-friction-out data-band="" aria-live="polite">
+<p class="small">Answer every question to see the result.</p></div>
+<p class="small" style="color:var(--t3);font-size:.8125rem">Reflects your answers only. Not a substitute for measurement.</p>
+</div></div>
+</div></div><div data-step hidden>
+<h2 class="d3">Automation suitability check.</h2>
+<p class="body" style="margin-top:.75rem">Not every process should be automated. These seven questions indicate which kind of intervention, if any, fits the process you have in mind.</p>
+<div style="margin-top:2rem">
+<div class="panel panel--split rv" data-suit>
+<div class="panel__in"><div class="qs"><fieldset class="q" data-q="structured"><legend>Is the input structured and consistent?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="su-structured" id="su-structured-0" value="2"><label for="su-structured-0">Yes</label></span><span class="q__opt"><input type="radio" name="su-structured" id="su-structured-1" value="1"><label for="su-structured-1">Partly</label></span><span class="q__opt"><input type="radio" name="su-structured" id="su-structured-2" value="0"><label for="su-structured-2">No</label></span></div></fieldset><fieldset class="q" data-q="rules"><legend>Are the rules consistent and written down?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="su-rules" id="su-rules-0" value="2"><label for="su-rules-0">Yes</label></span><span class="q__opt"><input type="radio" name="su-rules" id="su-rules-1" value="1"><label for="su-rules-1">Partly</label></span><span class="q__opt"><input type="radio" name="su-rules" id="su-rules-2" value="0"><label for="su-rules-2">No</label></span></div></fieldset><fieldset class="q" data-q="identifiable"><legend>Can exceptions be identified reliably?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="su-identifiable" id="su-identifiable-0" value="2"><label for="su-identifiable-0">Yes</label></span><span class="q__opt"><input type="radio" name="su-identifiable" id="su-identifiable-1" value="1"><label for="su-identifiable-1">Partly</label></span><span class="q__opt"><input type="radio" name="su-identifiable" id="su-identifiable-2" value="0"><label for="su-identifiable-2">No</label></span></div></fieldset><fieldset class="q" data-q="volume"><legend>Is the volume high enough to matter?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="su-volume" id="su-volume-0" value="2"><label for="su-volume-0">Yes</label></span><span class="q__opt"><input type="radio" name="su-volume" id="su-volume-1" value="1"><label for="su-volume-1">Borderline</label></span><span class="q__opt"><input type="radio" name="su-volume" id="su-volume-2" value="0"><label for="su-volume-2">No</label></span></div></fieldset><fieldset class="q" data-q="measurable"><legend>Is the outcome measurable?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="su-measurable" id="su-measurable-0" value="2"><label for="su-measurable-0">Yes</label></span><span class="q__opt"><input type="radio" name="su-measurable" id="su-measurable-1" value="1"><label for="su-measurable-1">Partly</label></span><span class="q__opt"><input type="radio" name="su-measurable" id="su-measurable-2" value="0"><label for="su-measurable-2">No</label></span></div></fieldset><fieldset class="q" data-q="judgement"><legend>Does it require human judgement?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="su-judgement" id="su-judgement-0" value="2"><label for="su-judgement-0">Rarely</label></span><span class="q__opt"><input type="radio" name="su-judgement" id="su-judgement-1" value="1"><label for="su-judgement-1">Sometimes</label></span><span class="q__opt"><input type="radio" name="su-judgement" id="su-judgement-2" value="0"><label for="su-judgement-2">Constantly</label></span></div></fieldset><fieldset class="q" data-q="access"><legend>Are the systems accessible — API, export or database?</legend><div class="q__opts"><span class="q__opt"><input type="radio" name="su-access" id="su-access-0" value="2"><label for="su-access-0">Yes</label></span><span class="q__opt"><input type="radio" name="su-access" id="su-access-1" value="1"><label for="su-access-1">Partly</label></span><span class="q__opt"><input type="radio" name="su-access" id="su-access-2" value="0"><label for="su-access-2">No</label></span></div></fieldset></div></div>
+<div class="panel__out">
+<div class="verdict" data-suit-out data-band="" aria-live="polite">
+<p class="small">Answer every question to see the result.</p></div>
+<p class="small" style="color:var(--t3);font-size:.8125rem">An orientation based on your answers, not an assessment.</p>
+</div></div>
+</div></div><div data-step hidden>
+<h2 class="d3">Operational opportunity summary.</h2>
+<p class="body" style="margin-top:.75rem">Your three answers, read together. This is a starting position for a conversation — it is not a consulting assessment and it should not be treated as one.</p>
+<div class="panel" data-opportunity data-next-label="Recommended next action" style="margin-top:2rem">
+<div class="panel__out" data-opportunity-body><p class="small">Complete the modules above and your combined summary will appear here.</p></div>
+</div>
+<div style="margin-top:2rem;border-top:1px solid var(--line);padding-top:2rem">
+<h3 class="d3">Replace assumptions with observed data.</h3>
+<p class="body" style="margin-top:.75rem">The figures above are illustrative. Discovery measures the actual process, establishes a verified baseline, and identifies whether the opportunity is large enough to justify intervention. Sometimes it is not, and that is a useful answer too.</p>
+<div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem">
+<a class="btn btn--primary" href="/contact/">Measure this process properly<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="btn btn--ghost" href="/contact/">Book a 45-minute operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div></div></div>
+<div class="stepper__bar" style="border-top:1px solid var(--line);padding-top:1.5rem">
+<div class="stepper__nav">
+<button type="button" class="btn btn--ghost btn--small" data-stepnav="back">Back</button>
+<button type="button" class="btn btn--primary btn--small" data-stepnav="next">Next</button>
+<button type="button" class="btn btn--ghost btn--small" data-stepnav="restart">Start again</button>
+</div>
+<span class="micro">Answers stay in this browser tab. Nothing is transmitted.</span>
+</div>
+</div>
+<p class="small" style="margin-top:2rem;color:var(--t3);max-width:48rem">The tools and process models on this website provide illustrative planning indications based on information you enter. They are not an assessment, forecast, guarantee or client result. Discovery replaces assumptions with observed data.</p>
+</div></section><section class="section interstitial">
+<div class="wrap">
+<div class="split split--reverse">
+<div class="split__media rv rv--scale"><div class="media media--square"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — Nordic operational or architectural environment, night, wide crop]</span></div></div>
+<div class="split__copy">
+<p class="kicker">Next step</p>
+<h2 class="d1 rv">Find out what your repeated work actually costs.</h2>
+<p class="lede rv">Forty-five minutes with Anders. No charge, no obligation, and an honest answer about whether the opportunity is large enough to be worth pursuing.</p>
+<div class="stage__actions rv">
+<a class="btn btn--onviolet" href="/contact/">Book an operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="lnk" style="color:#fff" href="mailto:hello@amgadvisory.no">hello@amgadvisory.no<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</div></div></div></section></main></div>
+<div class="pv-page" id="pv/insights/" data-slug="insights" hidden><main id="main-insights"><section class="section--tight" style="padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem))">
+<div class="wrap">
+<p class="kicker">Insights</p>
+<h1 class="d1 rv" style="max-width:18ch;margin-top:1.5rem">Written for the person who has to sign it off.</h1>
+<p class="lede rv" style="margin-top:1.5rem">Short, practical notes on operational change: what works, what usually fails, and how to tell the difference before the budget is committed.</p>
+
+</div></section><section class="section--tight"><div class="wrap"><div class="cards cards--2" data-stagger><article class="card"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — abstract operational detail, dark, wide crop]</span></div><div class="card__body"><span class="card__n">Strategy · 7 min</span><h2 class="d3">How to think about AI as a capital allocation question</h2><p class="small">Treat it the way you treat any other investment: expected return, risk, and what else the money could do. A framework for deciding which processes deserve funding, in what order, and what evidence should be on the table before approval.</p><span class="tag" style="justify-self:start;margin-top:.5rem">In preparation</span></div></article><article class="card"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — document or ledger detail, dark, wide crop]</span></div><div class="card__body"><span class="card__n">Operations · 6 min</span><h2 class="d3">Five administrative tasks worth automating first</h2><p class="small">The process shapes that recur most often, why they are usually the cheapest place to start, and the conditions that make each one worth doing.</p><span class="tag" style="justify-self:start;margin-top:.5rem">In preparation</span></div></article><article class="card"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — industrial or logistics environment, dark, wide crop]</span></div><div class="card__body"><span class="card__n">Delivery · 9 min</span><h2 class="d3">Why most AI projects fail</h2><p class="small">Failure is rarely technical. It comes from unclear ownership, no measurement baseline, and a pilot never designed to survive contact with an exception. What to insist on before you start.</p><span class="tag" style="justify-self:start;margin-top:.5rem">In preparation</span></div></article><article class="card"><div class="media media--wide"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — process notation or mapping detail, dark, wide crop]</span></div><div class="card__body"><span class="card__n">Method · 8 min</span><h2 class="d3">What good process mapping looks like</h2><p class="small">How to map a process so the map is worth reading: what to record, who to ask, and why the useful information is almost always in the exceptions rather than the happy path.</p><span class="tag" style="justify-self:start;margin-top:.5rem">In preparation</span></div></article></div><p class="small rv" style="margin-top:2.5rem;color:var(--t3);max-width:44rem">Research and practical analysis in development. Mention it when you get in touch and we will send them when published.</p></div></section><section class="section interstitial">
+<div class="wrap">
+<div class="split split--reverse">
+<div class="split__media rv rv--scale"><div class="media media--square"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — Nordic operational or architectural environment, night, wide crop]</span></div></div>
+<div class="split__copy">
+<p class="kicker">Next step</p>
+<h2 class="d1 rv">Find out what your repeated work actually costs.</h2>
+<p class="lede rv">Forty-five minutes with Anders. No charge, no obligation, and an honest answer about whether the opportunity is large enough to be worth pursuing.</p>
+<div class="stage__actions rv">
+<a class="btn btn--onviolet" href="/contact/">Book an operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="lnk" style="color:#fff" href="mailto:hello@amgadvisory.no">hello@amgadvisory.no<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</div></div></div></section></main></div>
+<div class="pv-page" id="pv/about/" data-slug="about" hidden><main id="main-about"><section class="section--tight" style="padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem))">
+<div class="wrap">
+<p class="kicker">About</p>
+<h1 class="d1 rv" style="max-width:18ch;margin-top:1.5rem">A deliberately narrow practice.</h1>
+<p class="lede rv" style="margin-top:1.5rem">We founded AMG Advisory because operational problems are rarely solved by adding another piece of software. The work combines business analysis, process design and modern engineering to build systems around how organisations actually operate.</p>
+
+</div></section><section class="section--tight"><div class="wrap"><div class="manifesto"><p class="lead-line rv">We will not pretend otherwise, and the engagement is designed so you do not have to take our word for anything.</p><p class="body rv">The premise is simple. The technology is rarely the hard part. The hard part is understanding a business well enough to know which work should exist at all — and that requires spending time inside an operation rather than reading a description of it.</p><p class="body rv">So we built the practice we would have wanted to hire. Fixed scope and fixed price. A short, honest piece of analysis first, so the decision to proceed rests on evidence rather than enthusiasm. And a firm limit on how many engagements run at once, because the quality of this work depends entirely on how well the operation underneath it is understood.</p></div></div></section><section class="section bg-void"><div class="wrap"><p class="kicker">The team</p><h2 class="d2 rv" style="margin-top:1.5rem">Founder-led. Directly accountable.</h2><p class="lede rv" style="margin-top:1rem">Anders leads each engagement from operational discovery through implementation. Morten supports research, testing, documentation and delivery.</p><div class="team rv" style="margin-top:clamp(2rem,4vw,3rem)">
+<div class="team__card">
+<div class="media media--wide"><span class="media__tag">Portrait required</span><span class="media__label">[FOUNDER PORTRAIT REQUIRED — Anders Godfrey]</span></div>
+<div class="team__body">
+<p class="team__role">Founder · leads every engagement</p>
+<h3 class="d2">Anders Godfrey</h3>
+<p class="body" style="margin-top:.5rem">Anders is the principal founder and primary operator of AMG Advisory. He is the person you meet first, the person who maps your processes, and the person accountable for the work at the end of it.</p>
+<div class="team__resp"><h4>Directly responsible for</h4><ul class="tick"><li>Client relationships and acquisition</li><li>Discovery and business analysis</li><li>Process mapping and operational measurement</li><li>Business-case and commercial analysis</li><li>Solution scoping and AI opportunity assessment</li><li>Project coordination and delivery oversight</li><li>Implementation and stakeholder management</li><li>Adoption and quality control</li></ul></div>
+<div class="team__resp"><h4>Background</h4><p class="ph">[INSERT VERIFIED ANDERS BIOGRAPHY]</p></div>
+</div></div>
+<div class="team__card team__card--support">
+<div class="media media--square"><span class="media__tag">Portrait required</span><span class="media__label">[MORTEN PORTRAIT REQUIRED — Morten Godfrey]</span></div>
+<div class="team__body">
+<p class="team__role">Research, implementation and delivery support</p>
+<h3 class="d3">Morten Godfrey</h3>
+<p class="small" style="margin-top:.5rem">Morten supports research, testing, documentation and implementation across AMG engagements.</p>
+<div class="team__resp"><h4>Supports</h4><ul class="tick"><li>Process research and workflow documentation</li><li>Data preparation and solution testing</li><li>Quality assurance and documentation</li><li>Tool and approach research</li><li>Implementation support</li></ul></div>
+<div class="team__resp"><h4>Background</h4><p class="ph">[INSERT VERIFIED MORTEN BIOGRAPHY]</p></div>
+</div></div>
+</div>
+<div class="rv" style="margin-top:2rem;max-width:44rem">
+<p class="micro" style="color:var(--violet-text)">Current capacity</p>
+<p class="body" style="margin-top:.75rem">We deliberately accept a limited number of engagements. Anders leads the work directly, with structured support from Morten, and specialist input added only where the scope genuinely requires it.</p>
+<p class="small" style="margin-top:.75rem;color:var(--t1)">Current engagement model: one or two focused client projects at a time.</p>
+<p class="small" style="margin-top:1rem;color:var(--t3);font-size:.8125rem">Backgrounds and photography are marked as placeholders and will be published once verified.</p>
+</div></div></section><section class="section light"><div class="wrap">
+<p class="kicker">Honesty</p>
+<h2 class="d2 rv" style="margin-top:1.5rem">We are a new firm</h2>
+<p class="lede rv" style="margin-top:1.5rem;max-width:44rem">We will not pretend otherwise, and the engagement is designed so you do not have to take our word for anything. Start with Discovery: a short, fixed-price piece of analysis that leaves you with a process map, a cost baseline and a ranked list of opportunities. It has independent value even if you never work with us again. Judge us on that before you commit to a build.</p>
+</div></section><section class="section bg-base"><div class="wrap">
+<p class="kicker">How we operate</p>
+<h2 class="d2 rv" style="margin-top:1.5rem">Four commitments, held in writing.</h2>
+<div class="cards cards--2" data-stagger style="margin-top:clamp(2rem,4vw,3rem)"><div><span class="card__n">01</span><h3 class="d4" style="margin-top:.5rem">Measure first</h3><p class="small" style="margin-top:.625rem">No engagement begins without a baseline. If we cannot say what a process costs today, we cannot honestly claim to have improved it.</p></div><div><span class="card__n">02</span><h3 class="d4" style="margin-top:.5rem">Fit the organisation</h3><p class="small" style="margin-top:.625rem">Systems are designed around how the work is actually done, workarounds included. A process that exists only in the handbook is not a process.</p></div><div><span class="card__n">03</span><h3 class="d4" style="margin-top:.5rem">Say the unwelcome thing</h3><p class="small" style="margin-top:.625rem">If an idea will not pay for itself, if the timing is wrong, or if the constraint is organisational rather than technical, you hear it from us early.</p></div><div><span class="card__n">04</span><h3 class="d4" style="margin-top:.5rem">Leave nothing behind</h3><p class="small" style="margin-top:.625rem">No proprietary layer, no hidden dependency, no locked accounts. Our value is the next problem we solve, not the last one we are holding.</p></div></div>
+</div></section><section class="section bg-raised"><div class="wrap">
+<p class="kicker">The comparison</p>
+<h2 class="d2 rv" style="margin-top:1.5rem">If you are also speaking to a Big Four firm.</h2>
+<p class="lede rv" style="margin-top:1rem">Sometimes they are the right answer, and we will say so. The difference is structural rather than a matter of quality.</p>
+<div class="rv" style="margin-top:clamp(2rem,4vw,3rem)">
+<table class="cmp"><thead><tr><th scope='col'></th><th scope='col'>A large consultancy</th><th scope='col'>AMG Advisory</th></tr></thead><tbody><tr><th scope='row'>Who does the work</th><td data-label="A large consultancy">A partner sells it; a team of consultants delivers it</td><td data-label="AMG Advisory">Anders, who scoped it</td></tr><tr><th scope='row'>Commercial model</th><td data-label="A large consultancy">Day rates, with scope that can move</td><td data-label="AMG Advisory">Fixed scope and fixed price, phase by phase</td></tr><tr><th scope='row'>First deliverable</th><td data-label="A large consultancy">A strategy document</td><td data-label="AMG Advisory">A measured baseline and a working system</td></tr><tr><th scope='row'>What you own afterwards</th><td data-label="A large consultancy">The recommendations</td><td data-label="AMG Advisory">The source code, documentation and accounts</td></tr><tr><th scope='row'>Incentive</th><td data-label="A large consultancy">Utilisation — the engagement continues</td><td data-label="AMG Advisory">Handover — the engagement ends well</td></tr><tr><th scope='row'>Technology position</th><td data-label="A large consultancy">Often tied to platform partnerships</td><td data-label="AMG Advisory">Independent; we resell nothing</td></tr><tr><th scope='row'>Scale</th><td data-label="A large consultancy">Hundreds of people, many countries</td><td data-label="AMG Advisory">Founder-led, one or two engagements at a time</td></tr><tr><th scope='row'>Track record</th><td data-label="A large consultancy">Decades of published client work</td><td data-label="AMG Advisory">A new firm. Judge the method, and Discovery, before the rest</td></tr></tbody></table></div>
+<p class="small rv" style="margin-top:2rem;max-width:46rem;color:var(--t3)">If your programme needs forty people across twelve countries, hire a firm that has forty people. We are built for a different problem: finding the operational cost inside one organisation and removing it without a transformation programme.</p>
+</div></section><section class="section interstitial">
+<div class="wrap">
+<div class="split split--reverse">
+<div class="split__media rv rv--scale"><div class="media media--square"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — Nordic operational or architectural environment, night, wide crop]</span></div></div>
+<div class="split__copy">
+<p class="kicker">Next step</p>
+<h2 class="d1 rv">Find out what your repeated work actually costs.</h2>
+<p class="lede rv">Forty-five minutes with Anders. No charge, no obligation, and an honest answer about whether the opportunity is large enough to be worth pursuing.</p>
+<div class="stage__actions rv">
+<a class="btn btn--onviolet" href="/contact/">Book an operational review<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<a class="lnk" style="color:#fff" href="mailto:hello@amgadvisory.no">hello@amgadvisory.no<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</div></div></div></section></main></div>
+<div class="pv-page" id="pv/contact/" data-slug="contact" hidden><main id="main-contact"><section class="section--tight" style="padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem))">
+<div class="wrap">
+<p class="kicker">Contact</p>
+<h1 class="d1 rv" style="max-width:18ch;margin-top:1.5rem">Find where your first 500 hours may be hiding.</h1>
+<p class="lede rv" style="margin-top:1.5rem">Forty-five minutes with Anders, no charge and no obligation. We will ask how work moves through your organisation, identify two or three processes worth measuring, and give you an honest view of whether the opportunity is large enough to be worth pursuing.</p>
+
+</div></section><section class="section--tight"><div class="wrap"><div class="split">
+<div class="split__copy">
+<form data-form data-email="hello@amgadvisory.no" novalidate>
+<label class="field"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+<label class="field"><span>Work email</span><input type="email" name="email" autocomplete="email" required></label>
+<label class="field"><span>Organisation</span><input type="text" name="org" autocomplete="organization"></label>
+<label class="field"><span>Roughly how many people work there?</span>
+<select name="size"><option>Fewer than 50</option><option selected>50–200</option>
+<option>200–500</option><option>500–1000</option><option>More than 1000</option></select></label>
+<label class="field"><span>Which work is consuming the most time?</span>
+<textarea name="message" placeholder="A sentence or two is plenty."></textarea></label>
+<button class="btn btn--primary" type="submit">Send enquiry<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<p class="formnote" role="status" data-status style="margin-top:1rem">We reply to every enquiry within one working day. Your details are used only to respond and are never shared.</p>
+</form></div>
+<div class="split__media rv rv--scale"><div class="media media--tall"><span class="media__tag">Placeholder</span><span class="media__label">[IMAGE REQUIRED — Nordic operational or architectural environment, night, wide crop]</span></div></div>
+</div></div></section>
+<section class="section bg-void"><div class="wrap">
+<p class="kicker">The session</p>
+<h2 class="d2 rv" style="margin-top:1.5rem">What an operational review involves.</h2>
+<div class="cards cards--2" data-stagger style="margin-top:clamp(2rem,4vw,3rem)"><div><span class="card__n">01</span><h2 class="d4" style="margin-top:.5rem">What we will ask</h2><p class="small" style="margin-top:.625rem">Where work backs up, how many people touch it, what it costs when it goes wrong, and which systems are already in place.</p></div><div><span class="card__n">02</span><h2 class="d4" style="margin-top:.5rem">What you will leave with</h2><p class="small" style="margin-top:.625rem">An initial view of where the value may sit and roughly what it would take to establish it — useful to you whether or not you engage us.</p></div><div><span class="card__n">03</span><h2 class="d4" style="margin-top:.5rem">What happens next</h2><p class="small" style="margin-top:.625rem">If it makes sense, we propose a fixed-price Discovery engagement. If it does not, we will say so, and point you somewhere better if we can.</p></div></div>
+<p class="rv" style="margin-top:2rem"><a class="lnk" href="/diagnostic/">Or run the diagnostic yourself first<svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+</div></section></main></div>
+<div class="pv-page" id="pv/privacy/" data-slug="privacy" hidden><main id="main-privacy"><section class="section--tight" style="padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem))">
+<div class="wrap">
+<p class="kicker">Legal</p>
+<h1 class="d1 rv" style="max-width:18ch;margin-top:1.5rem">Privacy</h1>
+<p class="lede rv" style="margin-top:1.5rem">What we collect, why we collect it, and how long we keep it.</p>
+
+</div></section><section class="section--tight"><div class="wrap wrap--narrow"><p class="small" style="border-left:2px solid var(--coral);padding-left:1.25rem;color:var(--t2)">This page is a considered starting point drafted for a Norwegian consultancy, not legal advice. Have it reviewed by counsel and complete the organisation number and data controller details before launch.</p><section style="margin-top:2.5rem"><h2 class="d4">Who we are</h2><p class="body" style="margin-top:.75rem;max-width:44rem">AMG Advisory is a business transformation consultancy based in Bergen, Norway. For the purposes of the GDPR and the Norwegian Personal Data Act, AMG Advisory is the data controller for information collected through this website. Enquiries about this notice can be sent to hello@amgadvisory.no. Organisation number: [INSERT ORGANISATION NUMBER].</p></section><section style="margin-top:2.5rem"><h2 class="d4">What we collect</h2><p class="body" style="margin-top:.75rem;max-width:44rem">Only what you send us. If you complete the enquiry form we receive your name, your email address, your organisation and the content of your message. This website sets no advertising or tracking cookies, builds no visitor profiles, and embeds no external analytics that identify you. The diagnostic tools run entirely in your browser and send nothing anywhere.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Why we collect it</h2><p class="body" style="margin-top:.75rem;max-width:44rem">To reply to your enquiry and, if we go on to work together, to administer that engagement. Our lawful basis is legitimate interest in responding to a business enquiry, and the performance of a contract once one exists.</p></section><section style="margin-top:2.5rem"><h2 class="d4">How long we keep it</h2><p class="body" style="margin-top:.75rem;max-width:44rem">Enquiry correspondence is retained for twenty-four months and then deleted. Records relating to an engagement are retained for the period required by Norwegian accounting and contract law.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Who else sees it</h2><p class="body" style="margin-top:.75rem;max-width:44rem">Our email and business systems providers process data on our behalf under data processing agreements. We do not sell data, and we do not share it for marketing.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Client data during an engagement</h2><p class="body" style="margin-top:.75rem;max-width:44rem">Where we process personal data belonging to a client, that client is the controller and we act as processor under a written data processing agreement. We work inside the client's own infrastructure and data residency requirements wherever possible, and we document what is retained and why.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Your rights</h2><p class="body" style="margin-top:.75rem;max-width:44rem">You may request access to the personal data we hold about you, ask for it to be corrected or erased, object to processing, or request portability. Write to hello@amgadvisory.no. You also have the right to complain to Datatilsynet, the Norwegian Data Protection Authority.</p></section><p class="micro" style="margin-top:3rem">Last updated 2026-07-25</p></div></section></main></div>
+<div class="pv-page" id="pv/terms/" data-slug="terms" hidden><main id="main-terms"><section class="section--tight" style="padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem))">
+<div class="wrap">
+<p class="kicker">Legal</p>
+<h1 class="d1 rv" style="max-width:18ch;margin-top:1.5rem">Terms</h1>
+<p class="lede rv" style="margin-top:1.5rem">The terms governing use of this website, and how they relate to an engagement.</p>
+
+</div></section><section class="section--tight"><div class="wrap wrap--narrow"><p class="small" style="border-left:2px solid var(--coral);padding-left:1.25rem;color:var(--t2)">This page is a considered starting point drafted for a Norwegian consultancy, not legal advice. Have it reviewed by counsel and complete the organisation number and data controller details before launch.</p><section style="margin-top:2.5rem"><h2 class="d4">These terms</h2><p class="body" style="margin-top:.75rem;max-width:44rem">These terms govern use of this website. The terms of any engagement are set out separately in a written proposal and contract, which take precedence over anything published here.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Information on this site</h2><p class="body" style="margin-top:.75rem;max-width:44rem">Content is provided for general information. Timelines, ranges and figures shown on this site are planning assumptions for administrative process redesign. They are illustrative, they are labelled as such, and they are not forecasts, guarantees, offers, or descriptions of results AMG has produced.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Illustrative cases</h2><p class="body" style="margin-top:.75rem;max-width:44rem">The operational cases described on this site are process models used to demonstrate method. They do not describe named or unnamed clients, and they are not presented as completed client projects.</p></section><section style="margin-top:2.5rem"><h2 class="d4">The diagnostic tools</h2><p class="body" style="margin-top:.75rem;max-width:44rem">The calculator, friction score and suitability check perform simple arithmetic and scoring on figures and answers you enter. They run in your browser, transmit nothing, and produce an order-of-magnitude indication for discussion. They are not advice, not an assessment, and no decision should be taken on them alone.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Intellectual property</h2><p class="body" style="margin-top:.75rem;max-width:44rem">All content, design and code on this site belong to AMG Advisory unless stated otherwise. Work produced during a client engagement transfers to the client as set out in the engagement contract.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Liability</h2><p class="body" style="margin-top:.75rem;max-width:44rem">We take care to keep this site accurate and available, but we do not warrant that it is error-free or uninterrupted. To the extent permitted by law, we are not liable for loss arising from reliance on information published here.</p></section><section style="margin-top:2.5rem"><h2 class="d4">Governing law</h2><p class="body" style="margin-top:.75rem;max-width:44rem">These terms are governed by Norwegian law, and the Norwegian courts have exclusive jurisdiction.</p></section><p class="micro" style="margin-top:3rem">Last updated 2026-07-25</p></div></section></main></div><footer class="foot">
+<div class="wrap">
+<div class="foot__grid">
+<div>
+<a class="brand" href="/">AMG <small>Advisory</small></a>
+<p class="small" style="max-width:24rem;margin-top:1rem">We find where your organisation loses time, and remove the work.</p>
+<p class="micro" style="margin-top:1.25rem">Bergen, Norway · Norway and the Nordics</p>
+<p class="micro" style="margin-top:.5rem">Founder-led · Anders Godfrey and Morten Godfrey</p>
+</div>
+<div><h2>Pages</h2><ul><li><a href="/services/">Services</a></li><li><a href="/approach/">Approach</a></li><li><a href="/diagnostic/">Diagnostic</a></li><li><a href="/insights/">Insights</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+<div><h2>Services</h2><ul><li><a href="/services/#discovery-redesign">Process discovery and redesign</a></li><li><a href="/services/#document-processing">Document and invoice processing</a></li><li><a href="/services/#reporting">Reporting and management information</a></li><li><a href="/services/#integration">Systems integration and workflow automation</a></li></ul></div>
+<div><h2>Contact</h2><ul>
+<li><a href="mailto:hello@amgadvisory.no">hello@amgadvisory.no</a></li>
+<li><span class="ph">[INSERT VERIFIED LINKEDIN URL]</span></li>
+<li><a href="/contact/">Book a review</a></li>
+</ul></div>
+</div>
+<div class="foot__base">
+<p class="foot__legal">The tools and process models on this website provide illustrative planning indications based on information you enter. They are not an assessment, forecast, guarantee or client result. Discovery replaces assumptions with observed data.</p>
+<div style="display:flex;flex-wrap:wrap;gap:.75rem 1.75rem;justify-content:space-between">
+<p>&copy; 2026 AMG Advisory</p>
+<p><a href="/privacy/">Privacy</a> &nbsp;·&nbsp; <a href="/terms/">Terms</a></p>
+</div>
+</div>
+</div>
+</footer><!-- DEVELOPMENT PREVIEW CONTROL — REMOVE BEFORE PRODUCTION -->
+<div class="pv" data-open="false">
+<div class="pv__menu" role="menu" aria-label="Preview pages">
+<strong>Page preview</strong><a href="#/" data-pv="/" role="menuitem">Home</a><a href="#/services/" data-pv="/services/" role="menuitem">Services</a><a href="#/approach/" data-pv="/approach/" role="menuitem">Approach</a><a href="#/diagnostic/" data-pv="/diagnostic/" role="menuitem">Diagnostic</a><a href="#/insights/" data-pv="/insights/" role="menuitem">Insights</a><a href="#/about/" data-pv="/about/" role="menuitem">About</a><a href="#/contact/" data-pv="/contact/" role="menuitem">Contact</a><a href="#/privacy/" data-pv="/privacy/" role="menuitem">Privacy</a><a href="#/terms/" data-pv="/terms/" role="menuitem">Terms</a>
+<p class="pv__note">Dev utility · not in production build</p>
+</div>
+<button type="button" class="pv__toggle" aria-expanded="false" aria-haspopup="menu">
+<i aria-hidden="true"></i><span data-pv-label>Page preview</span></button>
+</div>
+<!-- END DEVELOPMENT PREVIEW CONTROL --><script>/* ==========================================================================
+   AMG ADVISORY — v3 behaviour
+   No dependencies.
+
+   Degradation: with JavaScript disabled the site is fully readable, the hero
+   diagram still animates (CSS only), every scenario and disclosure still opens
+   (native <details>), all four diagnostic steps are visible at once instead of
+   sequenced, and both process states are described in text.
+
+   Storage: nothing is written to disk or transmitted. Diagnostic answers live
+   in memory for the life of the tab only.
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  var mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = mq.matches;
+  var nb = new Intl.NumberFormat("nb-NO");
+  var cfgEl = document.getElementById("amg-config");
+  var CFG = cfgEl ? JSON.parse(cfgEl.textContent) : {};
+
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function n0(v) { return nb.format(Math.round(v)); }
+  function kr(v) {
+    if (v >= 1e6) return "kr " + (v / 1e6).toFixed(v < 1e7 ? 2 : 1) + " m";
+    return "kr " + nb.format(Math.round(v / 1000) * 1000);
+  }
+  function round50(v) { return Math.round(v / 50) * 50; }
+
+  /* ------------------------------------------------------------------ nav */
+  var nav = $(".nav");
+  if (nav) {
+    var stick = function () { nav.setAttribute("data-stuck", window.scrollY > 12 ? "true" : "false"); };
+    stick();
+    window.addEventListener("scroll", stick, { passive: true });
+  }
+
+  /* Full-screen menu with a real focus trap and focus return. */
+  var menuBtn = $(".menubtn"), menu = $(".menu");
+  if (menuBtn && menu) {
+    var lastFocus = null;
+
+    var focusables = function () {
+      return $$('a[href], button:not([disabled]), input, select, textarea', menu)
+        .filter(function (el) { return el.offsetParent !== null; });
+    };
+
+    var setMenu = function (open) {
+      menuBtn.setAttribute("aria-expanded", String(open));
+      menu.setAttribute("data-open", String(open));
+      menu.setAttribute("aria-hidden", String(!open));
+      document.body.style.overflow = open ? "hidden" : "";
+      if (open) {
+        lastFocus = document.activeElement;
+        var f = focusables();
+        if (f.length) f[0].focus();
+      } else if (lastFocus) {
+        lastFocus.focus();
+        lastFocus = null;
+      }
+    };
+
+    menuBtn.addEventListener("click", function () {
+      setMenu(menuBtn.getAttribute("aria-expanded") !== "true");
+    });
+    menu.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+
+    document.addEventListener("keydown", function (e) {
+      if (menu.getAttribute("data-open") !== "true") return;
+      if (e.key === "Escape") { setMenu(false); return; }
+      if (e.key !== "Tab") return;
+      var f = focusables();
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    /* The preview router fires this so menu state never survives a route change. */
+    document.addEventListener("amg:route", function () {
+      if (menu.getAttribute("data-open") === "true") setMenu(false);
+    });
+  }
+
+  /* --------------------------------------------------------------- reveal */
+  var revealTargets = $$(".rv, [data-stagger]");
+  if (reduce || !("IntersectionObserver" in window)) {
+    revealTargets.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("in");
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    revealTargets.forEach(function (el) { io.observe(el); });
+  }
+
+  /* Count numbers up once, when they arrive. */
+  function countUp(el) {
+    var to = parseFloat(el.dataset.count || "0");
+    var dp = parseInt(el.dataset.dp || "0", 10);
+    var suffix = el.dataset.suffix || "";
+    if (reduce) { el.textContent = nb.format(to.toFixed(dp)) + suffix; return; }
+    var t0 = performance.now(), dur = 1100;
+    var tick = function (t) {
+      var p = Math.min(1, (t - t0) / dur);
+      var v = to * (1 - Math.pow(1 - p, 3));
+      el.textContent = nb.format(v.toFixed(dp)) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  var counters = $$("[data-count]");
+  if (counters.length) {
+    if (!("IntersectionObserver" in window)) counters.forEach(countUp);
+    else {
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          countUp(en.target);
+          cio.unobserve(en.target);
+        });
+      }, { threshold: 0.4 });
+      counters.forEach(function (el) { cio.observe(el); });
+    }
+  }
+
+  /* ------------------------------------------------- motion pause controls */
+  $$("[data-motiontoggle]").forEach(function (btn) {
+    var target = document.getElementById(btn.getAttribute("aria-controls"));
+    if (!target) return;
+    var set = function (on) {
+      target.setAttribute("data-motion", on ? "on" : "off");
+      btn.setAttribute("aria-pressed", String(on));
+      btn.textContent = on ? (btn.dataset.on || "Pause") : (btn.dataset.off || "Play");
+    };
+    set(!reduce);
+    btn.addEventListener("click", function () {
+      set(target.getAttribute("data-motion") !== "on");
+    });
+    if (mq.addEventListener) {
+      mq.addEventListener("change", function (e) { reduce = e.matches; set(!e.matches); });
+    }
+  });
+
+  /* --------------------------------------------------- sticky scroll story */
+  var story = $("[data-story]");
+  if (story) {
+    var steps = $$("[data-step-i]", story);
+    var stage = $("[data-story-stage]", story);
+    var layers = stage ? $$("[data-layer]", stage) : [];
+
+    var applyStep = function (i) {
+      steps.forEach(function (s, j) { s.setAttribute("data-on", String(j === i)); });
+      if (stage) stage.setAttribute("data-step", String(i));
+      layers.forEach(function (l) {
+        var from = parseInt(l.dataset.from || "0", 10);
+        var until = l.dataset.until ? parseInt(l.dataset.until, 10) : 99;
+        l.setAttribute("data-on", String(i >= from && i <= until));
+      });
+      $$("[data-tallystate]", story).forEach(function (t) {
+        t.setAttribute("data-phase", i >= 4 ? "after" : "today");
+      });
+    };
+
+    if (!("IntersectionObserver" in window) || reduce) {
+      steps.forEach(function (s) { s.setAttribute("data-on", "true"); });
+      layers.forEach(function (l) { l.setAttribute("data-on", "true"); });
+    } else {
+      var sio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) applyStep(parseInt(en.target.dataset.stepI, 10));
+        });
+      }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+      steps.forEach(function (s) { sio.observe(s); });
+      applyStep(0);
+    }
+
+    /* Keyboard and button equivalents, so the story never needs scroll to work. */
+    var idx = 0;
+    $$("[data-story-nav]", story).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        idx = Math.max(0, Math.min(steps.length - 1, idx + (btn.dataset.storyNav === "next" ? 1 : -1)));
+        applyStep(idx);
+        steps[idx].scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+      });
+    });
+  }
+
+  /* ================================================== DIAGNOSTIC MODULES */
+  var scopes = $$(".pv-page");
+  if (!scopes.length) scopes = [document];
+  scopes.forEach(initModules);
+
+  function dispatch(root, name) {
+    (root === document ? document : root).dispatchEvent(new CustomEvent(name));
+  }
+
+  function initModules(root) {
+    var state = { cost: null, friction: null, suit: null };
+
+    /* ---------------------------------------------- module 1 — cost */
+    var calc = $("[data-calc]", root);
+    if (calc) {
+      var inputs = $$("input[type=range]", calc);
+      var out = {};
+      $$("[data-out]", calc).forEach(function (el) { out[el.dataset.out] = el; });
+
+      var animate = function (el, to, fmt) {
+        if (!el) return;
+        var from = parseFloat(el.getAttribute("data-v") || "0");
+        el.setAttribute("data-v", String(to));
+        if (reduce || Math.abs(to - from) < 1) { el.textContent = fmt(to); return; }
+        var t0 = performance.now(), dur = 420;
+        var tick = function (t) {
+          var p = Math.min(1, (t - t0) / dur);
+          el.textContent = fmt(from + (to - from) * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      var setBar = function (name, value, max, label) {
+        var bar = $('[data-bar="' + name + '"]', calc);
+        if (!bar) return;
+        var fill = $(".bar__fill", bar), val = $("[data-barval]", bar);
+        if (fill) fill.style.width = Math.max(0, Math.min(100, (value / max) * 100)) + "%";
+        if (val) val.textContent = label;
+      };
+
+      var recompute = function () {
+        var v = {};
+        inputs.forEach(function (input) {
+          v[input.dataset.key] = Number(input.value);
+          var o = $('output[for="' + input.id + '"]', calc);
+          if (o) o.textContent = nb.format(input.value) + (input.dataset.unit || "");
+        });
+
+        var weeks = v.weeks || 46;
+        var rules = (v.rules === undefined ? 60 : v.rules) / 100;
+        var rework = (v.rework === undefined ? 6 : v.rework) / 100;
+        var growth = (v.growth === undefined ? 8 : v.growth) / 100;
+
+        var hours = v.people * v.hours * weeks;
+        var cost = hours * v.rate;
+        var fte = hours / (37.5 * weeks);
+
+        /* Recovery is driven by how much of the work is rule-based, with partial
+           credit for work currently redone. Capped at 80% — no honest redesign
+           removes everything. */
+        var share = function (f) { return Math.min(0.8, rules * f + rework * 0.4); };
+        var low = hours * share(0.35), mid = hours * share(0.5), high = hours * share(0.65);
+
+        var threeCost = 0;
+        for (var y = 0; y < 3; y++) threeCost += cost * Math.pow(1 + growth, y);
+        var growthHours = hours * (Math.pow(1 + growth, 3) - 1);
+
+        animate(out.hours, hours, n0);
+        animate(out.cost, cost, kr);
+        animate(out.fte, fte, function (x) { return x.toFixed(1); });
+        if (out.recover) out.recover.textContent = n0(round50(low)) + "–" + n0(round50(high)) + " h";
+        if (out.value) out.value.textContent = kr(low * v.rate) + "–" + kr(high * v.rate);
+        if (out.three) animate(out.three, threeCost, kr);
+
+        var max = hours + growthHours;
+        setBar("retained", hours - mid, max, n0(round50(hours - mid)) + " h");
+        setBar("recover", mid, max, n0(round50(low)) + "–" + n0(round50(high)) + " h");
+        setBar("growth", growthHours, max, n0(round50(growthHours)) + " h");
+
+        var text = "At the assumptions entered, repeated administrative work consumes approximately " +
+          n0(hours) + " hours each year, equivalent to " + fte.toFixed(1) + " full-time roles, at a cost of about " +
+          kr(cost) + ". A measured redesign could indicate between " + n0(round50(low)) + " and " + n0(round50(high)) +
+          " hours of recoverable capacity, worth roughly " + kr(low * v.rate) + " to " + kr(high * v.rate) +
+          " a year. At " + (growth * 100).toFixed(0) + "% annual volume growth, leaving it unchanged costs approximately " +
+          kr(threeCost) + " over three years. This is an illustrative range, not a forecast.";
+
+        var sum = $("[data-summary]", calc);
+        if (sum) sum.textContent = text;
+
+        state.cost = { hours: hours, cost: cost, fte: fte, low: low, high: high, three: threeCost, rate: v.rate, text: text };
+        dispatch(root, "amg:update");
+      };
+
+      inputs.forEach(function (i) { i.addEventListener("input", recompute); });
+      recompute();
+
+      var copyBtn = $("[data-copy]", calc);
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function () {
+          var status = $("[data-copystatus]", calc);
+          var done = function (ok) {
+            if (status) status.textContent = ok ? (copyBtn.dataset.copy || "Copied.") : "Copy failed — select the text above instead.";
+          };
+          var text = state.cost ? state.cost.text : "";
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = text; document.body.appendChild(ta); ta.select();
+            var ok = false;
+            try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+            document.body.removeChild(ta); done(ok);
+          }
+        });
+      }
+      var printBtn = $("[data-print]", calc);
+      if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
+    }
+
+    /* ------------------------------------------ module 2 — friction */
+    var fr = $("[data-friction]", root);
+    if (fr && CFG.friction) {
+      var frRender = function () {
+        var sets = $$("fieldset[data-q]", fr), total = 0, per = {}, answered = 0;
+        sets.forEach(function (fs) {
+          var picked = $("input:checked", fs);
+          var val = picked ? Number(picked.value) : 0;
+          if (picked) answered++;
+          per[fs.dataset.q] = val; total += val;
+        });
+        var box = $("[data-friction-out]", fr);
+        if (!box) return;
+        if (answered < sets.length) {
+          box.setAttribute("data-band", "");
+          box.innerHTML = '<p class="micro">Answered ' + answered + " of " + sets.length + "</p>" +
+            '<p class="small">Answer every question to see the result.</p>';
+          state.friction = null; dispatch(root, "amg:update"); return;
+        }
+        var band = CFG.friction.bands.filter(function (b) { return total >= b[0] && total <= b[1]; })[0] || CFG.friction.bands[0];
+        var top = Object.keys(per).sort(function (a, b) { return per[b] - per[a]; })[0];
+        var source = CFG.friction.sources[top] || "";
+        var t = band[2].toLowerCase();
+        var key = t.indexOf("high") === 0 ? "high" : t.indexOf("moderate") === 0 ? "moderate" : "low";
+        box.setAttribute("data-band", key);
+        box.innerHTML =
+          '<p class="verdict__band"><i aria-hidden="true"></i>' + band[2] + "</p>" +
+          '<p class="stat">' + total + '<span style="font-size:.42em;letter-spacing:0"> / 21</span></p>' +
+          '<p class="small">' + band[3] + "</p>" +
+          '<div class="rows"><div><span>Principal source</span><b class="is-accent">' + source + "</b></div></div>" +
+          '<p class="small" style="color:var(--t3);font-size:.8125rem">' + CFG.friction.measureFirst + "</p>";
+        state.friction = { total: total, band: band[2], key: key, source: source };
+        dispatch(root, "amg:update");
+      };
+      fr.addEventListener("change", frRender);
+      frRender();
+    }
+
+    /* --------------------------------------- module 3 — suitability */
+    var su = $("[data-suit]", root);
+    if (su && CFG.suitability) {
+      var suRender = function () {
+        var sets = $$("fieldset[data-q]", su), a = {}, answered = 0;
+        sets.forEach(function (fs) {
+          var picked = $("input:checked", fs);
+          if (picked) answered++;
+          a[fs.dataset.q] = picked ? Number(picked.value) : null;
+        });
+        var box = $("[data-suit-out]", su);
+        if (!box) return;
+        if (answered < sets.length) {
+          box.innerHTML = '<p class="micro">Answered ' + answered + " of " + sets.length + "</p>" +
+            '<p class="small">Answer every question to see the result.</p>';
+          state.suit = null; dispatch(root, "amg:update"); return;
+        }
+        var key;
+        if (a.judgement === 0 && a.volume <= 1) key = "human_led";
+        else if (a.structured === 2 && a.rules === 2 && a.access >= 1 && a.identifiable >= 1) key = "conventional";
+        else if (a.measurable >= 1 && a.identifiable >= 1 && a.volume >= 1 && (a.structured < 2 || a.rules < 2)) key = "ai_assisted";
+        else if (a.rules <= 1 && a.structured <= 1) key = "process_first";
+        else key = "assess";
+        var res = CFG.suitability.results[key];
+        box.innerHTML = '<p class="verdict__band"><i aria-hidden="true"></i>Indication</p>' +
+          '<p class="d3">' + res[0] + "</p><p class=\"small\">" + res[1] + "</p>";
+        state.suit = { key: key, title: res[0] };
+        dispatch(root, "amg:update");
+      };
+      su.addEventListener("change", suRender);
+      suRender();
+    }
+
+    /* ------------------------------------------- combined summary */
+    var combo = $("[data-opportunity]", root);
+    if (combo) {
+      var NEXT = {
+        process_first: "Redesign the process before considering tooling. Discovery would establish the baseline and identify which steps should exist at all.",
+        conventional: "Measure the process properly, then scope conventional integration and workflow automation. AI is unlikely to be needed.",
+        ai_assisted: "Measure the process properly, then scope a conventional workflow with a narrow AI step where judgement is genuinely required.",
+        human_led: "Leave this process human-led and document it well. Look for a higher-volume, more rule-based process to assess instead.",
+        assess: "The answers point in several directions, which usually means this is more than one process. A short Discovery would separate them."
+      };
+      var renderCombo = function () {
+        var body = $("[data-opportunity-body]", combo);
+        if (!body) return;
+        var rows = "";
+        if (state.cost) {
+          rows += '<div><span>Estimated repeated-work cost</span><b class="is-warn">' + kr(state.cost.cost) + " a year</b></div>";
+          rows += '<div><span>Indicative recoverable capacity</span><b class="is-accent">' +
+            n0(round50(state.cost.low)) + "–" + n0(round50(state.cost.high)) + " h</b></div>";
+        }
+        rows += '<div><span>Process friction</span><b>' + (state.friction ? state.friction.band : "Not yet answered") + "</b></div>";
+        rows += '<div><span>Likely intervention</span><b>' + (state.suit ? state.suit.title : "Not yet answered") + "</b></div>";
+        var next = state.suit ? NEXT[state.suit.key]
+          : "Complete the friction and suitability steps to see a recommended next action.";
+        body.innerHTML = '<div class="rows" style="border-top:0;padding-top:0">' + rows + "</div>" +
+          '<div style="margin-top:1.25rem"><p class="micro">' + (combo.dataset.nextLabel || "Recommended next action") + "</p>" +
+          '<p class="small" style="margin-top:.5rem">' + next + "</p></div>";
+      };
+      (root === document ? document : root).addEventListener("amg:update", renderCombo);
+      renderCombo();
+    }
+
+    /* ---------------------------------- guided stepper (diagnostic page) */
+    var stepper = $("[data-stepper]", root);
+    if (stepper) {
+      var panels = $$("[data-step]", stepper);
+      var segs = $$("[data-seg]", stepper);
+      var names = $$("[data-stepname]", stepper);
+      var label = $("[data-steplabel]", stepper);
+      var prev = $('[data-stepnav="back"]', stepper);
+      var next = $('[data-stepnav="next"]', stepper);
+      var restart = $('[data-stepnav="restart"]', stepper);
+      var cur = 0;
+
+      var go = function (i) {
+        cur = Math.max(0, Math.min(panels.length - 1, i));
+        panels.forEach(function (p, j) { p.hidden = j !== cur; });
+        segs.forEach(function (s, j) { s.setAttribute("data-on", String(j <= cur)); });
+        names.forEach(function (s, j) { s.setAttribute("data-on", String(j === cur)); });
+        if (label) label.textContent = (stepper.dataset.of || "Step {n} of 4").replace("{n}", cur + 1);
+        if (prev) prev.disabled = cur === 0;
+        if (next) next.disabled = cur === panels.length - 1;
+        var h = panels[cur].querySelector("h2, h3");
+        if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+      };
+      if (prev) prev.addEventListener("click", function () { go(cur - 1); });
+      if (next) next.addEventListener("click", function () { go(cur + 1); });
+      if (restart) restart.addEventListener("click", function () {
+        $$("input[type=radio]", stepper).forEach(function (r) { r.checked = false; });
+        stepper.dispatchEvent(new Event("change", { bubbles: true }));
+        go(0);
+      });
+      go(0);
+    }
+  }
+
+  /* ------------------------------------------------------------- carousel */
+  $$("[data-carousel]").forEach(function (car) {
+    var track = $("[data-carousel-track]", car);
+    var slides = $$("[data-slide]", car);
+    var pos = $("[data-carousel-pos]", car);
+    var i = 0;
+    if (!track || !slides.length) return;
+    var go = function (n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      var target = slides[i];
+      track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: reduce ? "auto" : "smooth" });
+      if (pos) pos.textContent = (i + 1) + " / " + slides.length;
+      $$("[data-carousel-nav]", car).forEach(function (b) {
+        b.disabled = (b.dataset.carouselNav === "prev" && i === 0) ||
+                     (b.dataset.carouselNav === "next" && i === slides.length - 1);
+      });
+    };
+    $$("[data-carousel-nav]", car).forEach(function (b) {
+      b.addEventListener("click", function () { go(i + (b.dataset.carouselNav === "next" ? 1 : -1)); });
+    });
+    go(0);
+  });
+
+  /* ----------------------------------------------------------------- form */
+  var form = $("[data-form]");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var status = $("[data-status]", form);
+      var invalid = null;
+      $$("input[required], textarea[required]", form).forEach(function (f) {
+        var ok = f.checkValidity();
+        f.setAttribute("aria-invalid", ok ? "false" : "true");
+        if (!ok && !invalid) invalid = f;
+      });
+      if (invalid) {
+        if (status) status.textContent = "Please complete the highlighted fields before sending.";
+        invalid.focus();
+        return;
+      }
+      if (status) {
+        status.textContent = "Not sent. This form has no endpoint connected yet — please email " +
+          (form.dataset.email || "us") + " and we will reply within one working day.";
+      }
+    });
+  }
+})();
+</script><script>
+/* === DEVELOPMENT PREVIEW CONTROL — REMOVE BEFORE PRODUCTION === */
+(function(){
+  var pv=document.querySelector('.pv');
+  var toggle=pv.querySelector('.pv__toggle');
+  var label=pv.querySelector('[data-pv-label]');
+  var links=[].slice.call(pv.querySelectorAll('a[data-pv]'));
+
+  toggle.addEventListener('click',function(){
+    var open=pv.getAttribute('data-open')!=='true';
+    pv.setAttribute('data-open',String(open));
+    toggle.setAttribute('aria-expanded',String(open));
+  });
+  document.addEventListener('click',function(e){
+    if(!pv.contains(e.target)){pv.setAttribute('data-open','false');
+      toggle.setAttribute('aria-expanded','false');}
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){pv.setAttribute('data-open','false');
+      toggle.setAttribute('aria-expanded','false');}
+  });
+
+  function show(path){
+    if(!document.getElementById('pv'+path)) path='/';
+    var active=null;
+    [].forEach.call(document.querySelectorAll('.pv-page'),function(p){
+      var on=(p.id==='pv'+path); p.hidden=!on; if(on) active=p;
+    });
+    if(active){
+      [].forEach.call(active.querySelectorAll('.rv,.eyebrow'),function(el){el.classList.add('in');});
+      var skip=document.querySelector('.skip');
+      if(skip) skip.setAttribute('href','#main-'+active.dataset.slug);
+    }
+    links.forEach(function(a){
+      var on=a.getAttribute('data-pv')===path;
+      if(on){a.setAttribute('aria-current','page'); label.textContent=a.textContent;}
+      else a.removeAttribute('aria-current');
+    });
+    [].forEach.call(document.querySelectorAll('.nav__links a, .menu a'),function(a){
+      var h=a.getAttribute('href')||'';
+      if(h==='#'+path) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+    });
+    pv.setAttribute('data-open','false');
+    toggle.setAttribute('aria-expanded','false');
+    document.dispatchEvent(new CustomEvent('amg:route'));
+    window.scrollTo(0,0);
+  }
+
+  /* Rewrite site links to hash routes so the single file behaves like the site. */
+  [].forEach.call(document.querySelectorAll('a[href^="/"]'),function(a){
+    var h=a.getAttribute('href');
+    if(h.indexOf('//')===0) return;
+    a.setAttribute('href','#'+h);
+  });
+  window.addEventListener('hashchange',function(){show(location.hash.replace(/^#/,'')||'/');});
+  show(location.hash.replace(/^#/,'')||'/');
+})();
+/* === END DEVELOPMENT PREVIEW CONTROL === */
+</script>
+<!--
+# AMG Advisory — launch-readiness checklist (v3)
+
+## Complete
+
+- Dark art direction applied across every route. No page left in the pale editorial system.
+- Colour: grounds `#070709 / #0B0B10 / #10101A / #131326`; accents electric violet `#6C5CFF`, cobalt `#3D7BFF`, coral `#FF6A4B`. Small accent text uses `#8B7DFF` because `#6C5CFF` measures 4.01–4.42 on the dark grounds and fails AA at body size.
+- Full-viewport hero: animated SVG flow diagram, pause control, scroll cue, one primary CTA, one text link. Pure CSS animation, so it runs with JavaScript disabled and freezes under `prefers-reduced-motion`.
+- Six reusable compositions replace the repeated eyebrow/heading/grid template: stage, split, sticky story, editorial cards, interstitial (violet and light), manifesto.
+- Sticky scroll story: seven stages, pinned diagram, progressive layer reveals, plus previous/next buttons so the sequence never depends on scrolling.
+- Navigation reduced to five items plus a separate CTA. Full-screen menu with focus trap, focus return, scroll lock, Escape, and state reset on route change.
+- Homepage cut to eight sections and 1,337 words, from 2,274.
+- Diagnostic rebuilt as a guided four-step sequence with progress, back/forward, and answers preserved between steps. State lives in memory for the tab only — nothing stored, nothing transmitted.
+- Homepage calculator reduced to three inputs and three outputs, linking to the full diagnostic.
+- One global disclaimer in the footer sitewide; short labels elsewhere.
+- Team: Anders dominant, Morten supporting. No CTO, principal engineer, solution architect or equal delivery lead. Public description of internal training arrangements removed.
+- Every image is a visible, art-directed placeholder. No licence claimed, no portrait fabricated.
+- Server-side defaults render in the calculator and hero counter, so a JavaScript-disabled page shows real figures rather than zeros.
+- Verified: one `<header>`, one `<nav>` landmark, one `<main id="main">`, zero duplicate IDs, one `<h1>` per route, every range and radio input labelled, all JSON-LD valid.
+- Preview control remains a separate collapsible utility with removal comments, excluded from `dist/`.
+
+### On the three defects named in the brief
+
+All three were checked against source and were **not present** in v2.2. The selectors already read `.rv, .eyebrow` and `.nav__links a,.sheet a`, and every `rgba()` alpha was already a valid decimal. A sweep across the whole build confirms no malformed selector or invalid colour value exists anywhere. `tools/audit.py` now guards all three against regression.
+
+## Requires founder information
+
+- `[INSERT VERIFIED ANDERS BIOGRAPHY]`
+- `[INSERT VERIFIED MORTEN BIOGRAPHY]`
+- `[INSERT VERIFIED LINKEDIN URL]` — footer and both profiles
+- Confirm Morten's title: "Research, implementation and delivery support"
+- Confirm the engagement model line: "one or two focused client projects at a time"
+- Confirm fee guidance in the FAQ, and the office location line
+- Decide whether the 40–60% recovery range stays. It is the only forward-looking figure on the site.
+
+## Requires genuine photography
+
+- `[FOUNDER PORTRAIT REQUIRED — Anders Godfrey]` — About and homepage team
+- `[MORTEN PORTRAIT REQUIRED — Morten Godfrey]` — About and homepage team
+- No founder video until there is something factual to say on camera.
+
+## Requires licensed media
+
+Twenty-five placeholders, each carrying its own art direction. Priority order:
+
+1. Hero and closing CTA bands — full-bleed, dark exposure, wide crop
+2. Four capability cards — process mapping, document handling, reporting screen, systems infrastructure
+3. Illustrative case band — warehouse or back-office operations
+4. Four insight cards — abstract operational detail
+5. Open Graph image, 1200×630 — every share currently renders blank
+
+Direction: documentary, desaturated, architecturally cropped, naturally imperfect. No staged offices, handshakes, holograms or robots.
+
+## Requires technical integration
+
+- Form endpoint. The form validates client-side and states plainly that it is not connected. Add server-side validation, spam protection, accessible success and failure states.
+- Confirm where submissions are delivered and stored, then align the privacy notice with it.
+- Responsive images: `srcset`, AVIF/WebP, explicit dimensions. Placeholders already reserve aspect ratio.
+- Lazy-load below-the-fold media once real assets land.
+- Hosting, domain, favicon, touch icons.
+- Analytics decision. Privacy copy currently states no identifying analytics are embedded.
+- PDF export and send-with-enquiry are labelled "not built" in the interface. Build or remove.
+
+## Requires performance testing
+
+- Lighthouse and Core Web Vitals on a mid-range Android device, not only desktop.
+- Budget check once real media lands. Current build: 258 KB total, 22 KB JavaScript, no images.
+- Verify the hero SVG animation stays smooth on mid-range mobile; reduce line count if not.
+- Confirm no cumulative layout shift once images replace placeholders.
+- Consider `prefers-reduced-data` handling for the hero.
+
+## Requires accessibility testing
+
+- Screen-reader pass on the guided diagnostic, the full-screen menu and the sticky story.
+- Keyboard-only pass across stepper, carousel, tabs, menu and all range inputs.
+- Verify focus return after the menu closes, and that focus never lands inside a hidden step panel.
+- Confirm the carousel is fully operable without swipe, which is enhancement only.
+- Re-verify contrast on any text placed over real photography — measured ratios assume flat grounds.
+- Test with `prefers-reduced-motion` enabled end to end.
+
+## Requires legal review
+
+- `[INSERT ORGANISATION NUMBER]` — privacy page and footer
+- Legal entity name, registered address, data controller, retention periods, processors, international transfers
+- Cookie position — the site currently sets none
+- Source-code ownership language in the engagement contract
+- Geographic claims: "Norway and the Nordics"
+- Privacy and Terms are drafts prepared for a Norwegian consultancy naming Datatilsynet. Not final.
+
+## Requires future client evidence
+
+- Replace the five illustrative case models with measured client results, with permission.
+- Testimonials, named references, client logos. None invented; the sections do not exist.
+- Publish at least one insight. Four are marked "In preparation" — honest but inert.
+- The comparison table's track-record row reads "A new firm". Update when that changes.
+- Do not adopt wording such as "developed from engagement work" until there is engagement work behind it.
+
+-->
+</body></html>
